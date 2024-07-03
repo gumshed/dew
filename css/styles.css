@@ -1,0 +1,148 @@
+div > h2 {
+    text-align: center;
+    color: #f90000; /* Matching the header color for theme consistency */
+    margin: 20px 0; /* Adds vertical spacing around the h2 element */
+    font-size: 22px; /* Makes the text slightly smaller than the header */
+  }
+  .link-container {
+    text-align: center; /* Centers the link */
+    margin-top: 20px; /* Adds space between the header and this link */
+    margin-bottom: 20px; /* Optional: Adds space between this link and the image container */
+}
+
+@keyframes blinkAnimation {
+    0%, 100% { background-color: white; color: #f90000; } /* Start and end with white background, red text */
+    50% { background-color: #f90000; color: white; } /* Midpoint with red background, white text */
+}
+
+.link-container .button {
+    display: inline-block; /* Allows padding and width adjustments */
+    padding: 10px 20px; /* Top and bottom padding, left and right padding */
+    background-color: white; /* Initial background color */
+    color: #f90000; /* Initial text color */
+    text-decoration: none; /* Removes underline from links */
+    font-size: 18px; /* Font size for the button text */
+    border-radius: 5px; /* Rounded corners */
+    border: 2px solid #f90000; /* Red border to maintain visibility during blink */
+    cursor: pointer; /* Changes the mouse cursor to a pointer */
+    animation: blinkAnimation 1s infinite; /* Apply the blinking effect */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.link-container .button:hover {
+    animation: none; /* Optional: Stop blinking when hovering */
+    background-color: #c70000; /* Darker shade when hovered */
+    color: white;
+}
+
+
+
+
+  
+
+  .header {
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    background-color: blue; /* Initial background color */
+    animation: colorCycle 2s infinite linear; /* Adjust the duration as needed */
+  }
+  
+  @keyframes colorCycle {
+    0%, 100% { background-color: blue; }
+    12.5% { background-color: green; }
+    25% { background-color: violet; }
+    37.5% { background-color: red; }
+    50% { background-color: yellow; }
+    62.5% { background-color: orange; }
+    75% { background-color: teal; }
+    87.5% { background-color: pink; }
+  }
+  
+  
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    margin-top: 30px; /* Increased spacing */
+  }
+  
+  .shake-image {
+    max-width: 95%; /* Small padding around image */
+    height: auto;
+  }
+  
+  .social-links, .text-link {
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 20px; /* Added padding for better spacing */
+  }
+  
+  .social-icon, .text-link a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px; /* Uniform font size */
+  }
+  
+  .social-icon:hover, .text-link a:hover {
+    color: #555; /* Hover effect */
+  }
+  
+  .text-link a {
+    display: block; /* Ensures the anchor tag behaves like a block element */
+    padding: 10px; /* Adds padding around the text */
+    margin: 0 auto; /* Centers the link in its container */
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+    max-width: 90%; /* Restricts the maximum width to prevent overflow */
+    word-wrap: break-word; /* Ensures long words are wrapped if needed */
+    text-align: center; /* Optional: Centers the text if that's desired */
+  }
+  
+  .shake-image {
+    max-width: 95%; /* Small padding around image */
+    height: auto;
+    animation: shake 0.2s infinite; /* This line applies the shaking animation */
+  }
+  
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: translate(0, 0) rotate(0);
+    }
+    10% {
+      transform: translate(-5px, -3px) rotate(-3deg);
+    }
+    20% {
+      transform: translate(5px, 3px) rotate(3deg);
+    }
+    30% {
+      transform: translate(-5px, 5px) rotate(-3deg);
+    }
+    40% {
+      transform: translate(5px, -5px) rotate(3deg);
+    }
+    50% {
+      transform: translate(-5px, -3px) rotate(-3deg);
+    }
+    60% {
+      transform: translate(5px, 3px) rotate(3deg);
+    }
+    70% {
+      transform: translate(-5px, 5px) rotate(-3deg);
+    }
+    80% {
+      transform: translate(5px, -5px) rotate(3deg);
+    }
+    90% {
+      transform: translate(-5px, -3px) rotate(-3deg);
+    }
+  }
+  
