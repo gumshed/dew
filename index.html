@@ -1,44 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mind Control</title>
-<link rel="stylesheet" href="css/styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-<link rel="icon" type="image/png" href="img/180.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mind Control</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="img/180.png">
 </head>
 <body>
-<div class="header">
-  <h1>Mind Control</h1>
-</div>
-<div class="link-container">
-    <a href="https://pump.fun/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump" class="social-icon button">Buy $DEW</a>
-</div>
+    <div class="header">
+        <h1>Mind Control</h1>
+    </div>
+    <div class="link-container">
+        <button id="connect-wallet" class="wallet-button">Connect Wallet</button>
+        <button id="disconnect-wallet" class="wallet-button" style="display:none;">Disconnect Wallet</button>
+    </div>
+    <div id="wallet-info" class="wallet-info" style="display:none;">
+        <div class="metadata-container">
+            <h2>Welcome Citizen</h2>
+            <div id="token-metadata">
+                <p id="token-description"></p>
+            </div>
+            <div id="wallet-balance">
+                <p>Your DEW Balance: <span id="dew-balance">0</span></p>
+            </div>
+            <div class="buy-dew-container" style="display:none;">
+                <button class="buy-dew-button" onclick="window.location.href='https://pump.fun/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump'">Buy $DEW</button>
+            </div>
+            <div class="contract-address">
+                <a href="https://solscan.io/token/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump">ca: 6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump</a>
+            </div>
+        </div>
+    </div>
+    <div class="image-container">
+        <img src="img/178.png" alt="Mind Control Image" class="shake-image">
+    </div>
 
-<div class="image-container">
-  <img src="img/178.png" alt="Mind Control Image" class="shake-image">
-</div>
-
-<div class="text-link">
-  <a href="https://solscan.io/token/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump">ca: 6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump</a>
-</div>
-<div class="social-links">
-    <a href="https://x.com/DEWdealer" class="social-icon" rel="noopener noreferrer">Twitter</a>
-    <a href="https://dexscreener.com" class="social-icon" rel="noopener noreferrer">DexScreener</a>
-    <a href="https://t.me/+zjFkWxWV2RIzZjBh" class="social-icon" rel="noopener noreferrer">Telegram</a>
-</div>
-<script src="js/script.js"></script>
-</body>
-</html>"text-link">
-  <a href="https://example.com">ca: FVc5ig5t1R9AR66iDy7Tn7Ge1CVCCCKVcr8oCg55NFXU</a>
-</div>
-<div class="social-links">
-    <a href="https://x.com/DEWdealer" class="social-icon" rel="noopener noreferrer">Twitter</a>
-    <a href="https://dexscreener.com" class="social-icon" rel="noopener noreferrer">DexScreener</a>
-    <a href="https://t.me/+zjFkWxWV2RIzZjBh" class="social-icon" rel="noopener noreferrer">Telegram</a>
-</div>
-<script src="js/script.js"></script>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://x.com/DEWdealer" class="social-icon" rel="noopener noreferrer">Twitter</a>
+            <a href="https://dexscreener.com" class="social-icon" rel="noopener noreferrer">DexScreener</a>
+            <a href="https://t.me/+zjFkWxWV2RIzZjBh" class="social-icon" rel="noopener noreferrer">Telegram</a>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.30.0/lib/index.iife.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@project-serum/anchor/dist/anchor.iife.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
-
