@@ -130,36 +130,34 @@ body {
   margin-top: 10px;
 }
 
-.buy-dew-button {
+#wallet-balance span {
+  color: #f90000; /* Change the color of the balance */
+  font-size: 1.2em; /* Make the balance text larger */
+}
+
+.buy-dew-button, .wallet-button {
   padding: 10px 20px;
   margin: 10px;
-  background-color: #f90000;
-  color: white;
-  border: none;
+  background-color: white;
+  color: #f90000;
+  border: 2px solid #f90000;
   cursor: pointer;
   border-radius: 5px;
   text-decoration: none;
   font-size: 18px;
+  animation: blinkAnimation 1s infinite; /* Apply the blinking effect */
+  transition: background-color 0.3s;
 }
 
-.buy-dew-button:hover {
+.buy-dew-button:hover, .wallet-button:hover {
+  animation: none; /* Stop blinking when hovered */
   background-color: #c70000;
-}
-
-.wallet-button {
-  padding: 10px 20px;
-  margin: 10px;
-  background-color: #f90000;
   color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 18px;
 }
 
-.wallet-button:hover {
-  background-color: #c70000;
+@keyframes blinkAnimation {
+  0%, 100% { background-color: white; color: #f90000; }
+  50% { background-color: #f90000; color: white; }
 }
 
 footer {

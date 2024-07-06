@@ -48,10 +48,14 @@ async function fetchTokenInfo() {
 async function displayTokenMetadata() {
     const tokenInfo = await fetchTokenInfo();
     if (tokenInfo) {
-        document.getElementById('token-description').innerText = ` ${tokenInfo.description}`;
+        document.getElementById('token-description').innerText = `${tokenInfo.description}`;
     } else {
         document.getElementById('token-metadata').innerText = 'Error fetching token metadata';
     }
+}
+
+function formatBalance(balance) {
+    return balance.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 });
 }
 
 async function updateBalance(publicKey) {
@@ -69,7 +73,7 @@ async function updateBalance(publicKey) {
             }
         });
 
-        document.getElementById('dew-balance').innerText = dewBalance.toFixed(6);
+        document.getElementById('dew-balance').innerText = formatBalance(dewBalance);
     } catch (error) {
         console.error('Error updating balance:', error);
         document.getElementById('wallet-balance').innerText = 'Error fetching balance';
