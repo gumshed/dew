@@ -1,148 +1,227 @@
-div > h2 {
-    text-align: center;
-    color: #f90000; /* Matching the header color for theme consistency */
-    margin: 20px 0; /* Adds vertical spacing around the h2 element */
-    font-size: 22px; /* Makes the text slightly smaller than the header */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  align-items: center; /* Center align all content */
+  font-family: 'Rubik Mono One', monospace;
+}
+
+.header {
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+  background-color: blue;
+  animation: colorCycle 2s infinite linear;
+  border: 10px solid white;
+  box-sizing: border-box;
+  width: 100%; /* Ensure header spans full width */
+}
+
+@keyframes colorCycle {
+  0%, 100% { background-color: blue; }
+  12.5% { background-color: green; }
+  25% { background-color: violet; }
+  37.5% { background-color: red; }
+  50% { background-color: yellow; }
+  62.5% { background-color: orange; }
+  75% { background-color: teal; }
+  87.5% { background-color: pink; }
+}
+
+.link-container {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  margin: 30px 0;
+  width: 100%;
+}
+
+.shake-image {
+  max-width: 95%;
+  height: auto;
+  animation: shake 0.2s infinite;
+}
+
+.text-link {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.social-links, .text-link a {
+  margin: 0 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.social-links:hover, .text-link a:hover {
+  color: #555;
+}
+
+.text-link a {
+  display: block;
+  padding: 10px;
+  margin: 0 auto;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+  max-width: 90%;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  10% { transform: translate(-5px, -3px) rotate(-3deg); }
+  20% { transform: translate(5px, 3px) rotate(3deg); }
+  30% { transform: translate(-5px, 5px) rotate(-3deg); }
+  40% { transform: translate(5px, -5px) rotate(3deg); }
+  50% { transform: translate(-5px, -3px) rotate(-3deg); }
+  60% { transform: translate(5px, 3px) rotate(3deg); }
+  70% { transform: translate(-5px, 5px) rotate(-3deg); }
+  80% { transform: translate(5px, -5px) rotate(3deg); }
+  90% { transform: translate(-5px, -3px) rotate(-3deg); }
+}
+
+.wallet-info {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%; /* Ensure it takes the full width of the screen */
+  padding: 0 20px; /* Add some padding to the left and right */
+  box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}
+
+.metadata-container {
+  display: flex; /* Make the container a flexbox */
+  flex-direction: column; /* Arrange children in a column */
+  align-items: center; /* Center children horizontally */
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  width: calc(100% - 40px); /* Ensure a consistent buffer around the container */
+  max-width: 600px; /* Limit the maximum width */
+  text-align: center; /* Center text inside the container */
+  margin: 0 auto; /* Center the container */
+}
+
+#wallet-balance {
+  margin-top: 10px;
+}
+
+.buy-dew-button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #f90000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.buy-dew-button:hover {
+  background-color: #c70000;
+}
+
+.wallet-button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #f90000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.wallet-button:hover {
+  background-color: #c70000;
+}
+
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.footer-links a:hover {
+  color: #555;
+}
+
+.contract-address {
+  margin-top: 10px;
+  word-wrap: break-word;
+  word-break: break-all;
+  padding: 10px;
+}
+
+.contract-address a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.contract-address a:hover {
+  color: #555;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
   }
-  .link-container {
-    text-align: center; /* Centers the link */
-    margin-top: 20px; /* Adds space between the header and this link */
-    margin-bottom: 20px; /* Optional: Adds space between this link and the image container */
-}
 
-@keyframes blinkAnimation {
-    0%, 100% { background-color: white; color: #f90000; } /* Start and end with white background, red text */
-    50% { background-color: #f90000; color: white; } /* Midpoint with red background, white text */
-}
+  .metadata-container {
+    padding: 10px;
+  }
 
-.link-container .button {
-    display: inline-block; /* Allows padding and width adjustments */
-    padding: 10px 20px; /* Top and bottom padding, left and right padding */
-    background-color: white; /* Initial background color */
-    color: #f90000; /* Initial text color */
-    text-decoration: none; /* Removes underline from links */
-    font-size: 18px; /* Font size for the button text */
-    border-radius: 5px; /* Rounded corners */
-    border: 2px solid #f90000; /* Red border to maintain visibility during blink */
-    cursor: pointer; /* Changes the mouse cursor to a pointer */
-    animation: blinkAnimation 1s infinite; /* Apply the blinking effect */
-    transition: background-color 0.3s; /* Smooth transition for hover effect */
-}
-
-.link-container .button:hover {
-    animation: none; /* Optional: Stop blinking when hovering */
-    background-color: #c70000; /* Darker shade when hovered */
-    color: white;
-}
-
-
-
-
-  
+  .buy-dew-button, .wallet-button {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
 
   .header {
-    color: white;
-    text-align: center;
-    padding: 20px;
-    font-size: 24px;
-    background-color: blue; /* Initial background color */
-    animation: colorCycle 2s infinite linear; /* Adjust the duration as needed */
+    font-size: 20px;
+    padding: 15px;
   }
-  
-  @keyframes colorCycle {
-    0%, 100% { background-color: blue; }
-    12.5% { background-color: green; }
-    25% { background-color: violet; }
-    37.5% { background-color: red; }
-    50% { background-color: yellow; }
-    62.5% { background-color: orange; }
-    75% { background-color: teal; }
-    87.5% { background-color: pink; }
+
+  .social-links, .text-link a {
+    font-size: 16px;
   }
-  
-  
-  
-  .image-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 50vh;
-    margin-top: 30px; /* Increased spacing */
+
+  .contract-address {
+    font-size: 16px;
   }
-  
-  .shake-image {
-    max-width: 95%; /* Small padding around image */
-    height: auto;
+
+  #wallet-balance {
+    font-size: 16px;
   }
-  
-  .social-links, .text-link {
-    text-align: center;
-    margin-top: 20px;
-    padding-bottom: 20px; /* Added padding for better spacing */
-  }
-  
-  .social-icon, .text-link a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    font-size: 18px; /* Uniform font size */
-  }
-  
-  .social-icon:hover, .text-link a:hover {
-    color: #555; /* Hover effect */
-  }
-  
-  .text-link a {
-    display: block; /* Ensures the anchor tag behaves like a block element */
-    padding: 10px; /* Adds padding around the text */
-    margin: 0 auto; /* Centers the link in its container */
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    font-size: 18px;
-    max-width: 90%; /* Restricts the maximum width to prevent overflow */
-    word-wrap: break-word; /* Ensures long words are wrapped if needed */
-    text-align: center; /* Optional: Centers the text if that's desired */
-  }
-  
-  .shake-image {
-    max-width: 95%; /* Small padding around image */
-    height: auto;
-    animation: shake 0.2s infinite; /* This line applies the shaking animation */
-  }
-  
-  
-  @keyframes shake {
-    0%, 100% {
-      transform: translate(0, 0) rotate(0);
-    }
-    10% {
-      transform: translate(-5px, -3px) rotate(-3deg);
-    }
-    20% {
-      transform: translate(5px, 3px) rotate(3deg);
-    }
-    30% {
-      transform: translate(-5px, 5px) rotate(-3deg);
-    }
-    40% {
-      transform: translate(5px, -5px) rotate(3deg);
-    }
-    50% {
-      transform: translate(-5px, -3px) rotate(-3deg);
-    }
-    60% {
-      transform: translate(5px, 3px) rotate(3deg);
-    }
-    70% {
-      transform: translate(-5px, 5px) rotate(-3deg);
-    }
-    80% {
-      transform: translate(5px, -5px) rotate(3deg);
-    }
-    90% {
-      transform: translate(-5px, -3px) rotate(-3deg);
-    }
-  }
-  
+}
