@@ -6,6 +6,15 @@ body {
   align-items: center; /* Center align all content */
   font-family: 'Rubik Mono One', monospace;
   overflow-x: hidden; /* Prevent horizontal scrolling */
+  background-color: white !important; /* Force white background */
+  color: black; /* Ensure text is visible on a white background */
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: white !important; /* Force white background in dark mode */
+    color: black; /* Ensure text remains black in dark mode */
+  }
 }
 
 .header {
