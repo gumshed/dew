@@ -48,7 +48,7 @@ async function fetchTokenInfo() {
 async function displayTokenMetadata() {
     const tokenInfo = await fetchTokenInfo();
     if (tokenInfo) {
-        document.getElementById('token-description').innerText = ` ${tokenInfo.description}`;
+        document.getElementById('token-description').innerText = `Description: ${tokenInfo.description}`;
     } else {
         document.getElementById('token-metadata').innerText = 'Error fetching token metadata';
     }
