@@ -5,6 +5,7 @@ body {
   margin: 0;
   align-items: center; /* Center align all content */
   font-family: 'Rubik Mono One', monospace;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 .header {
@@ -161,8 +162,11 @@ footer {
 
 .footer-links {
   display: flex;
+  flex-wrap: wrap; /* Allow wrapping */
   justify-content: center;
   gap: 15px;
+  padding: 0 20px; /* Add padding to prevent overflow */
+  box-sizing: border-box; /* Ensure padding is included in total width */
 }
 
 .footer-links a {
