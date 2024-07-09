@@ -1,6 +1,6 @@
 const tokenAddress = '6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump';
 const rpcEndpoint = 'https://solana-mainnet.api.syndica.io/api-key/43PZugV22JroY8MB2F2RVizu5yApbvcmAfELBjuvCa2qL2TRwUiEBCu3zq1XVZuQ33MvvJZbihdRLy7WMdto1MeYfyJTiUtwbxJ';
-const apiUrl = `https://pumpportal.fun/api/data/token-info?ca=${tokenAddress}`;
+const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://pumpportal.fun/api/data/token-info?ca=${tokenAddress}`)}`;
 
 document.getElementById('connect-wallet').addEventListener('click', async () => {
     if (window.solana) {
@@ -38,7 +38,8 @@ async function fetchTokenInfo() {
             throw new Error('Network response was not ok');
         }
         const result = await response.json();
-        return result.data;  // Ensure this path is correct according to the API response structure
+        const tokenData = JSON.parse(result.contents);
+        return tokenData.data;  // Ensure this path is correct according to the API response structure
     } catch (error) {
         console.error('Error fetching token info:', error);
         return null;
