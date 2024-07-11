@@ -193,7 +193,7 @@ body {
   margin-bottom: 20px;
 }
 
-#info h2, #memes h2, #mind-control-mechanisms h2 {
+#info h2, #memes h2, #mind-control-mechanisms h2, #token-card h2 {
   text-align: center; /* Center the h2 tags */
 }
 
@@ -310,11 +310,24 @@ footer {
 
 .lowercase {
   text-transform: lowercase !important;
-  font-weight: bolder; /* Make the text thicker */
-  font-family: Arial, sans-serif, monospace; /* Change the font to one that supports lowercase */
+  font-weight: 800; /* Make the text thicker */
+  font-family: Arial, sans-serif; /* Change the font to one that supports lowercase */
 }
 
+.iframe-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
 
+.iframe-container iframe {
+  width: 80%;
+  height: 80vh;
+  border: none; /* Remove border */
+}
 
 /* Media query for smaller screens */
 @media (max-width: 600px) {
@@ -351,4 +364,22 @@ footer {
   .meme-link {
     font-size: 16px;
   }
+}
+
+.styled-link {
+  color: inherit; /* Use the inherited color */
+  text-decoration: none; /* Remove underline */
+  font-weight: normal; /* Make font weight normal */
+  transition: color 0.3s, transform 0.2s; /* Smooth transition for color and transform */
+}
+
+.styled-link:hover,
+.styled-link:focus {
+  color: #f90000; /* Change color on hover/focus */
+  transform: scale(1.05); /* Slightly enlarge the text */
+}
+
+.styled-link:active {
+  color: #f90000; /* Change color on click */
+  transform: scale(1); /* Reset the scale on click */
 }

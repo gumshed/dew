@@ -15,6 +15,7 @@ async function connectWallet() {
             updateBalance(publicKey);
         } catch (error) {
             console.error('Error connecting to wallet:', error);
+            // Provide user feedback about the error, e.g., display a message
         }
     } else {
         alert('Solana wallet not found. Please install a wallet extension like Phantom.');
