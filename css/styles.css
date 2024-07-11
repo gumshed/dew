@@ -182,11 +182,110 @@ body {
   color: #555;
 }
 
+.content {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+  padding-bottom: 80px; /* Add space to ensure the footer does not cover content */
+}
+
+.content section {
+  margin-bottom: 20px;
+}
+
+#info h2, #memes h2, #mind-control-mechanisms h2 {
+  text-align: center; /* Center the h2 tags */
+}
+
+.collapsible {
+  margin-bottom: 10px;
+}
+
+.collapsible-header {
+  background-color: #f1f1f1;
+  color: #333;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  width: 100%;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.collapsible-header:hover {
+  background-color: #ccc;
+}
+
+.collapsible-content {
+  padding: 10px;
+  display: none;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  border-left: 3px solid #ccc;
+}
+
+.collapsible-list {
+  list-style: none;
+  padding: 0;
+}
+
+.collapsible-list-item {
+  margin-bottom: 10px;
+}
+
+.collapsible-list-item .collapsible-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 20px);
+  padding: 10px 20px;
+  margin: 0 auto;
+}
+
+.meme-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.meme-link {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.meme-link:hover {
+  background-color: #ccc;
+  color: #000;
+}
+
+.meme {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 footer {
   background-color: #f1f1f1;
   text-align: center;
   padding: 10px 0;
   width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
 .footer-links {
@@ -238,6 +337,10 @@ footer {
   }
 
   #wallet-balance {
+    font-size: 16px;
+  }
+
+  .meme-link {
     font-size: 16px;
   }
 }

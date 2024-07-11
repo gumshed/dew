@@ -80,3 +80,28 @@ async function updateBalance(publicKey) {
         document.getElementById('wallet-balance').innerText = 'Error fetching balance';
     }
 }
+
+// Collapsible sections functionality
+document.addEventListener('DOMContentLoaded', function() {
+    var coll = document.getElementsByClassName("collapsible-header");
+    for (var i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function() {
+            // Close all other sections
+            var allContents = document.getElementsByClassName("collapsible-content");
+            for (var j = 0; j < allContents.length; j++) {
+                if (allContents[j] !== this.nextElementSibling) {
+                    allContents[j].style.display = "none";
+                    allContents[j].previousElementSibling.classList.remove("active");
+                }
+            }
+            // Toggle the clicked section
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+});
