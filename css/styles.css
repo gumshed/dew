@@ -308,6 +308,14 @@ footer {
   color: #555;
 }
 
+.lowercase {
+  text-transform: lowercase !important;
+  font-weight: bolder; /* Make the text thicker */
+  font-family: Arial, sans-serif, monospace; /* Change the font to one that supports lowercase */
+}
+
+
+
 /* Media query for smaller screens */
 @media (max-width: 600px) {
   body {

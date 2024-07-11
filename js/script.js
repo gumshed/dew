@@ -2,7 +2,7 @@ const tokenAddress = '6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump';
 const rpcEndpoint = 'https://solana-mainnet.api.syndica.io/api-key/43PZugV22JroY8MB2F2RVizu5yApbvcmAfELBjuvCa2qL2TRwUiEBCu3zq1XVZuQ33MvvJZbihdRLy7WMdto1MeYfyJTiUtwbxJ';
 const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://pumpportal.fun/api/data/token-info?ca=${tokenAddress}`)}`;
 
-document.getElementById('connect-wallet').addEventListener('click', async () => {
+async function connectWallet() {
     if (window.solana) {
         try {
             await window.solana.connect();
@@ -19,7 +19,9 @@ document.getElementById('connect-wallet').addEventListener('click', async () => 
     } else {
         alert('Solana wallet not found. Please install a wallet extension like Phantom.');
     }
-});
+}
+
+document.getElementById('connect-wallet').addEventListener('click', connectWallet);
 
 document.getElementById('disconnect-wallet').addEventListener('click', () => {
     if (window.solana) {
@@ -105,3 +107,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// Listen for account changes in Phantom wallet
+if (window.solana) {
+    window.solana.on('accountChanged', (publicKey) => {
+        if (publicKey) {
+            const newPublicKey = publicKey.toString();
+            updateBalance(newPublicKey);
+        } else {
+            // Handle the case where the user has disconnected their wallet
+            document.getElementById('connect-wallet').style.display = 'block';
+            document.getElementById('disconnect-wallet').style.display = 'none';
+            document.getElementById('wallet-info').style.display = 'none';
+            document.querySelector('.buy-dew-container').style.display = 'none';
+        }
+    });
+}
