@@ -240,7 +240,7 @@ footer {
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
-  margin-bottom: 50px; /* Add extra space at the bottom */
+  margin-bottom: 20px; /* Add extra space at the bottom */
 }
 
 .iframe-container iframe {
