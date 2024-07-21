@@ -3,11 +3,18 @@ body {
   flex-direction: column;
   min-height: 100vh;
   margin: 0;
-  align-items: center; /* Center align all content */
   font-family: 'Rubik Mono One', monospace;
   overflow-x: hidden; /* Prevent horizontal scrolling */
   background-color: white !important; /* Force white background */
   color: black; /* Ensure text is visible on a white background */
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center content vertically */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -43,6 +50,9 @@ body {
 .link-container {
   text-align: center;
   margin: 20px 0;
+  display: flex;
+  justify-content: center; /* Center the buttons */
+  gap: 10px; /* Add some space between buttons */
 }
 
 .image-container {
@@ -123,7 +133,7 @@ body {
   width: calc(100% - 40px); /* Ensure a consistent buffer around the container */
   max-width: 600px; /* Limit the maximum width */
   text-align: center; /* Center text inside the container */
-  margin: 0 auto; /* Center the container */
+  margin: 20px auto; /* Center the container and add space between sections */
 }
 
 #wallet-balance {
@@ -154,13 +164,33 @@ body {
   background-color: #c70000;
   color: white;
 }
+#token-description {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+  word-wrap: break-word;
+}
+
 
 @keyframes blinkAnimation {
   0%, 100% { background-color: white; color: #f90000; }
   50% { background-color: #f90000; color: white; }
 }
 
+.buy-dew-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
 .contract-address {
+  display: flex;
+  justify-content: center; /* Center the content */
+  text-align: center;
   margin-top: 10px;
   word-wrap: break-word;
   word-break: break-all;
@@ -171,111 +201,10 @@ body {
   color: #333;
   text-decoration: none;
   font-weight: bold;
-  transition: transform 0.2s; /* Transition effect for click */
-}
-
-.contract-address a:active {
-  transform: scale(1.1); /* Scale up the link on click */
 }
 
 .contract-address a:hover {
   color: #555;
-}
-
-.content {
-  width: 100%;
-  padding: 20px;
-  box-sizing: border-box;
-  padding-bottom: 80px; /* Add space to ensure the footer does not cover content */
-}
-
-.content section {
-  margin-bottom: 20px;
-}
-
-#info h2, #memes h2, #mind-control-mechanisms h2, #token-card h2 {
-  text-align: center; /* Center the h2 tags */
-}
-
-.collapsible {
-  margin-bottom: 10px;
-}
-
-.collapsible-header {
-  background-color: #f1f1f1;
-  color: #333;
-  cursor: pointer;
-  padding: 10px;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 18px;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  width: 100%;
-  box-sizing: border-box; /* Include padding in width */
-}
-
-.collapsible-header:hover {
-  background-color: #ccc;
-}
-
-.collapsible-content {
-  padding: 10px;
-  display: none;
-  overflow: hidden;
-  background-color: #f9f9f9;
-  border-left: 3px solid #ccc;
-}
-
-.collapsible-list {
-  list-style: none;
-  padding: 0;
-}
-
-.collapsible-list-item {
-  margin-bottom: 10px;
-}
-
-.collapsible-list-item .collapsible-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: calc(100% - 20px);
-  padding: 10px 20px;
-  margin: 0 auto;
-}
-
-.meme-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-}
-
-.meme-link {
-  display: block;
-  text-decoration: none;
-  color: #333;
-  font-weight: bold;
-  text-align: center;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.meme-link:hover {
-  background-color: #ccc;
-  color: #000;
-}
-
-.meme {
-  max-width: 100%;
-  height: auto;
-  border: 1px solid #ccc;
-  border-radius: 5px;
 }
 
 footer {
@@ -283,9 +212,7 @@ footer {
   text-align: center;
   padding: 10px 0;
   width: 100%;
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  margin-top: auto; /* Ensure the footer is always at the bottom */
 }
 
 .footer-links {
@@ -321,12 +248,17 @@ footer {
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
+  margin-bottom: 20px; /* Add extra space at the bottom */
 }
 
 .iframe-container iframe {
   width: 80%;
   height: 80vh;
   border: none; /* Remove border */
+}
+
+.content section p {
+  font-family: 'Rubik Mono One', monospace; /* Apply font to section paragraphs */
 }
 
 /* Media query for smaller screens */
@@ -360,10 +292,6 @@ footer {
   #wallet-balance {
     font-size: 16px;
   }
-
-  .meme-link {
-    font-size: 16px;
-  }
 }
 
 .styled-link {
@@ -383,13 +311,49 @@ footer {
   color: #f90000; /* Change color on click */
   transform: scale(1); /* Reset the scale on click */
 }
+
+.collapsible-list {
+  list-style: none;
+  padding: 0;
+}
+
+.collapsible-list-item {
+  margin-bottom: 10px;
+}
+
+.collapsible-header {
+  background-color: #f1f1f1;
+  color: #333;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.collapsible-header:hover {
+  background-color: #ccc;
+}
+
+.collapsible-content {
+  padding: 10px;
+  display: none;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  border-left: 3px solid #ccc;
+}
+
 .meme-item {
   position: relative;
   display: inline-block;
   margin: 10px;
   cursor: pointer;
   overflow: hidden;
-  position: relative;
 }
 
 .meme-item .download-button {

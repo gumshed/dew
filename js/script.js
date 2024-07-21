@@ -1,6 +1,5 @@
 const tokenAddress = '6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump';
 const rpcEndpoint = 'https://solana-mainnet.api.syndica.io/api-key/43PZugV22JroY8MB2F2RVizu5yApbvcmAfELBjuvCa2qL2TRwUiEBCu3zq1XVZuQ33MvvJZbihdRLy7WMdto1MeYfyJTiUtwbxJ';
-const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://pumpportal.fun/api/data/token-info?ca=${tokenAddress}`)}`;
 
 async function connectWallet() {
     if (window.solana) {
@@ -10,12 +9,11 @@ async function connectWallet() {
             document.getElementById('connect-wallet').style.display = 'none';
             document.getElementById('disconnect-wallet').style.display = 'block';
             document.getElementById('wallet-info').style.display = 'block';
-            document.querySelector('.buy-dew-container').style.display = 'block';
-            displayTokenMetadata();
+            displayConnectedText();
             updateBalance(publicKey);
         } catch (error) {
             console.error('Error connecting to wallet:', error);
-            // Provide user feedback about the error, e.g., display a message
+            alert('Error connecting to wallet. Please try again.');
         }
     } else {
         alert('Solana wallet not found. Please install a wallet extension like Phantom.');
@@ -30,32 +28,14 @@ document.getElementById('disconnect-wallet').addEventListener('click', () => {
         document.getElementById('connect-wallet').style.display = 'block';
         document.getElementById('disconnect-wallet').style.display = 'none';
         document.getElementById('wallet-info').style.display = 'none';
-        document.querySelector('.buy-dew-container').style.display = 'none';
     }
 });
 
-async function fetchTokenInfo() {
-    try {
-        const response = await fetch(apiUrl);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const result = await response.json();
-        const tokenData = JSON.parse(result.contents);
-        return tokenData.data;  // Ensure this path is correct according to the API response structure
-    } catch (error) {
-        console.error('Error fetching token info:', error);
-        return null;
-    }
-}
-
-async function displayTokenMetadata() {
-    const tokenInfo = await fetchTokenInfo();
-    if (tokenInfo) {
-        document.getElementById('token-description').innerText = `${tokenInfo.description}`;
-    } else {
-        document.getElementById('token-metadata').innerText = 'Error fetching token metadata';
-    }
+function displayConnectedText() {
+    const connectedText = `
+        Most of the affected individuals reported an acute onset of neurological symptoms associated with a perceived localized loud sound such as screeching, chirping, clicking, or piercing noises. Two-thirds experienced visual disturbances such as blurred vision and sensitivity to light. 
+    `;
+    document.getElementById('token-description').innerText = connectedText;
 }
 
 function formatBalance(balance) {
@@ -114,13 +94,13 @@ if (window.solana) {
     window.solana.on('accountChanged', (publicKey) => {
         if (publicKey) {
             const newPublicKey = publicKey.toString();
+            displayConnectedText();
             updateBalance(newPublicKey);
         } else {
             // Handle the case where the user has disconnected their wallet
             document.getElementById('connect-wallet').style.display = 'block';
             document.getElementById('disconnect-wallet').style.display = 'none';
             document.getElementById('wallet-info').style.display = 'none';
-            document.querySelector('.buy-dew-container').style.display = 'none';
         }
     });
 }
