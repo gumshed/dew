@@ -410,14 +410,18 @@ footer {
 .scrolling-banner {
   position: relative;
   width: 100vw; /* Full width of the viewport */
-  overflow: visible; /* Hide overflow */
+  overflow: hidden; /* Hide overflow */
   background-color: #a09e9e; /* Change as needed */
   color: #000; /* Change as needed */
   padding: 10px 0; /* Adjust padding as needed */
   box-sizing: border-box;
   text-align: center; /* Center align the text */
   margin: 0; /* Remove any default margins */
+  display: flex;
+  justify-content: center; /* Center the text horizontally */
+  align-items: center; /* Center the text vertically */
 }
+
 
 /* Scrolling text */
 .scrolling-text {
@@ -429,10 +433,10 @@ footer {
 /* Scroll animation */
 @keyframes scrollText {
   0% {
-    transform: translateX(10%);
+    transform: translateX(60%);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-60%);
   }
 }
 
@@ -465,44 +469,44 @@ footer {
 }
 
 .copy-notification {
-  visibility: hidden; /* Hidden by default */
-  min-width: 100px;
-  margin-left: -50px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 10px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  bottom: 30px;
-  font-size: 17px;
+    visibility: hidden; /* Hidden by default */
+    min-width: 100px;
+    margin-left: -50px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 10px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
 }
 
 /* Show the notification */
 .copy-notification.show {
-  visibility: visible; /* Show the notification */
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    visibility: visible; /* Show the notification */
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
 @-webkit-keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
 }
 
 @keyframes fadein {
-  from {bottom: 0; opacity: 0;}
-  to {bottom: 30px; opacity: 1;}
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
 }
 
 @-webkit-keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }
 
 @keyframes fadeout {
-  from {bottom: 30px; opacity: 1;}
-  to {bottom: 0; opacity: 0;}
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
 }
