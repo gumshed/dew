@@ -16,7 +16,7 @@ async function connectWallet() {
             alert('Error connecting to wallet. Please try again.');
         }
     } else {
-        alert('Solana wallet not found. Please install a wallet extension like Phantom.');
+        alert('Solana wallet not found. Please install a wallet extension like Phantom.'); // Spend some time thinking
     }
 }
 
@@ -103,4 +103,23 @@ if (window.solana) {
             document.getElementById('wallet-info').style.display = 'none';
         }
     });
+}
+
+
+function copyToClipboard() {
+    const fullText = document.getElementById("contract-address-text").innerText;
+    const address = fullText.split(" ")[1]; // Extract the address portion
+    navigator.clipboard.writeText(address).then(() => {
+        showNotification();
+    }).catch(err => {
+        console.error("Failed to copy: ", err);
+    });
+}
+
+function showNotification() {
+    const notification = document.getElementById("copy-notification");
+    notification.className = "copy-notification show";
+    setTimeout(() => {
+        notification.className = notification.className.replace("show", "");
+    }, 3000);
 }

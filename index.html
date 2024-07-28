@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="img/180.png">
+    
 </head>
 <body>
     <div class="container">
@@ -36,8 +37,9 @@
         <div class="buy-dew-container">
             <button class="buy-dew-button" onclick="window.location.href='https://pump.fun/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump'">Buy $DEW</button>
             <div class="contract-address">
-                <a href="https://solscan.io/token/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump">ca: 6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump</a>
+                <span id="contract-address-text" onclick="copyToClipboard()">ca: 6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump</span>
             </div>
+            
         </div>
 
         <div class="content">
@@ -53,8 +55,16 @@
                     <iframe width="1146" height="657" src="https://www.youtube.com/embed/ubqpQr7UUuI?playlist=ubqpQr7UUuI&loop=1" title="Who are you fighting?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </section>
-            
-        
+        </div>
+
+        <!-- Scrolling Banner -->
+        <div class="scrolling-banner">
+            <div class="scrolling-text">
+                the pervasive division in society might not be coincidental, but rather a result of deliberate government-sponsored propaganda. advanced technologies like voice beaming and rmf radiation likely play a significant role in this strategy. these tools subtly implant thoughts and manipulate emotions, fostering distrust and paranoia among the populace. by influencing individuals at a subconscious level, these technologies create calculated societal fractures. this orchestrated effort aims to keep people divided and suspicious, eroding social cohesion. such manipulation makes it challenging to trust personal perceptions and the motives of others. the outcome is a society strategically fragmented and distracted, controlled by covert technological influences.
+            </div>
+        </div>
+
+        <div class="content">
             <section id="mind-control-mechanisms" class="metadata-container">
                 <h2>Mechanisms of Mind Control with DEWS</h2>
                 <ul class="collapsible-list">
@@ -135,26 +145,39 @@
                 </div>
             </section>
 
-            <section id="token-card" class="metadata-container iframe-container">
+            <section id="token-card" class="metadata-container">
                 <h2>
                     <a href="https://pump.fun/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump" class="styled-link">
                         The Ticker is $DEW
                     </a>
                 </h2>
             </section>
+
+            <section id="text-container" class="metadata-container">
+                <p class="small-text">Disclaimer: $DEW (Directed Energy Weapons) and other memecoins are highly volatile investments. This project explores the theme of mind control methods and technology employed by various powerful groups and organizations, reflecting discussions and concerns raised by whistleblowers over the years. There is a significant risk of losing all invested capital. Please invest cautiously and conduct your own research (DYOR) before making any investment decisions.</p>
+            </section>
         </div>
     </div>
     <!-- Footer -->
     <footer>
         <div class="footer-links">
-            <a href="https://x.com/DEWdealer" class="social-icon" rel="noopener noreferrer">Twitter</a>
-            <a href="https://pump.fun/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump" class="social-icon" rel="noopener noreferrer">Pump.Fun</a>
-            <a href="https://t.me/+zjFkWxWV2RIzZjBh" class="social-icon" rel="noopener noreferrer">Telegram</a>
+            <a href="https://x.com/DEWdealer" class="social-icon" rel="noopener noreferrer">
+                <img src="img/twitter-icon.png" alt="Twitter" class="footer-icon">
+            </a>
+            <a href="https://pump.fun/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump" class="social-icon" rel="noopener noreferrer">
+                <img src="img/pumpfun-icon.png" alt="Pump.Fun" class="footer-icon">
+            </a>
+            <a href="https://dexscreener.com/solana/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump" class="social-icon" rel="noopener noreferrer">
+                <img src="img/dexscreener.png" alt="Pump.Fun" class="footer-icon">
+            </a>
+            <a href="https://t.me/+zjFkWxWV2RIzZjBh" class="social-icon" rel="noopener noreferrer">
+                <img src="img/telegram-icon.png" alt="Telegram" class="footer-icon">
+            </a>
         </div>
     </footer>
     
+    <div id="copy-notification" class="copy-notification">Copied!</div>
     <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.30.0/lib/index.iife.min.js"></script>
-    <script src="js/script.js" type="module"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
-
