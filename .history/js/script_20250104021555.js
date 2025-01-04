@@ -340,8 +340,38 @@ function displayContent(option) {
             `;
             break;
         case 'trade':
-            case 'truth':
-    content = `<strong>Coming Soon...</strong?`;
+            case 'trade':
+    content = `
+        <h3 class="content-header">Trade</h3>
+        <div class="swap-box">
+            <!-- From Section -->
+            <div class="token-row">
+                <label for="from-token">From</label>
+                <select id="from-token" class="token-select">
+                    <option value="sol">SOL</option>
+                    <option value="dew">DEW</option>
+                </select>
+                <input type="number" id="from-amount" placeholder="0" class="token-input" min="0" />
+                <p class="balance-info" id="from-balance">Balance: 0</p>
+            </div>
+
+            <!-- Swap Arrow -->
+            <div class="arrow">↓</div>
+
+            <!-- To Section -->
+            <div class="token-row">
+                <label for="to-token">To</label>
+                <select id="to-token" class="token-select">
+                    <option value="dew">DEW</option>
+                    <option value="sol">SOL</option>
+                </select>
+                <input type="number" id="to-amount" placeholder="0" class="token-input" min="0" disabled />
+                <p class="balance-info" id="to-balance">Balance: 0</p>
+            </div>
+
+            <!-- Swap Button -->
+            <button id="swap-button" class="swap-button" disabled>Swap</button>
+        </div>`;
     break;
 
             text = `<strong>Coming Soon</strong>`;

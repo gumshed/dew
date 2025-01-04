@@ -7,15 +7,12 @@ const rpcEndpoint = 'https://solana-mainnet.api.syndica.io/api-key/43PZugV22JroY
 async function connectWallet() {
     if (window.solana) {
         try {
-            const response = await window.solana.connect();
-            const publicKey = window.solana.publicKey?.toString();
-            if (!publicKey) {
-                alert("Failed to retrieve public key. Try again.");
-                return;
-            }
+            await window.solana.connect();
+            const publicKey = window.solana.publicKey.toString();
             document.getElementById('connect-wallet').style.display = 'none';
             document.getElementById('disconnect-wallet').style.display = 'block';
             document.getElementById('wallet-info').style.display = 'block';
+            displayConnectedText();
             updateBalance(publicKey);
         } catch (error) {
             console.error('Error connecting to wallet:', error);
@@ -25,34 +22,6 @@ async function connectWallet() {
         alert('Solana wallet not found. Please install a wallet extension like Phantom.');
     }
 }
-
-async function updateBalance(publicKey) {
-    try {
-        const connection = new solanaWeb3.Connection(rpcEndpoint, 'confirmed');
-        const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-            new solanaWeb3.PublicKey(publicKey),
-            { programId: new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA') }
-        );
-
-        if (!tokenAccounts.value.length) {
-            document.getElementById('dew-balance').innerText = '0.000';
-            return;
-        }
-
-        let dewBalance = 0;
-        tokenAccounts.value.forEach(account => {
-            if (account.account.data.parsed.info.mint === tokenAddress) {
-                dewBalance = account.account.data.parsed.info.tokenAmount.uiAmount || 0;
-            }
-        });
-
-        document.getElementById('dew-balance').innerText = formatBalance(dewBalance);
-    } catch (error) {
-        console.error('Error updating balance:', error);
-        document.getElementById('wallet-balance').innerText = 'Error fetching balance';
-    }
-}
-
 
 document.getElementById('connect-wallet').addEventListener('click', connectWallet);
 
@@ -64,71 +33,6 @@ document.getElementById('disconnect-wallet').addEventListener('click', () => {
         document.getElementById('wallet-info').style.display = 'none';
     }
 });
-
-// Wallet balances
-let solBalance = 0;
-let dewBalance = 0;
-
-// Fetch balances on wallet connect
-async function fetchBalances(publicKey) {
-    try {
-        const connection = new solanaWeb3.Connection(rpcEndpoint, 'confirmed');
-        
-        // Fetch SOL balance
-        solBalance = await connection.getBalance(new solanaWeb3.PublicKey(publicKey));
-        solBalance = solBalance / solanaWeb3.LAMPORTS_PER_SOL;
-        document.getElementById('from-balance').innerText = `Balance: ${solBalance.toFixed(3)} SOL`;
-
-        // Fetch DEW balance
-        const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-            new solanaWeb3.PublicKey(publicKey),
-            { programId: new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA') }
-        );
-
-        dewBalance = 0;
-        tokenAccounts.value.forEach(account => {
-            if (account.account.data.parsed.info.mint === tokenAddress) {
-                dewBalance = account.account.data.parsed.info.tokenAmount.uiAmount || 0;
-            }
-        });
-
-        document.getElementById('to-balance').innerText = `Balance: ${dewBalance.toFixed(3)} DEW`;
-    } catch (error) {
-        console.error('Error fetching balances:', error);
-    }
-}
-
-// Handle Swap Logic
-async function performSwap() {
-    const fromToken = document.getElementById('from-token').value;
-    const toToken = document.getElementById('to-token').value;
-    const fromAmount = parseFloat(document.getElementById('from-amount').value);
-
-    if (!fromAmount || fromAmount <= 0) {
-        alert('Enter a valid amount to swap.');
-        return;
-    }
-
-    alert(`Swapping ${fromAmount} ${fromToken.toUpperCase()} for ${toToken.toUpperCase()}`);
-    // Add logic to interact with Raydium's swap API
-}
-
-// Enable Swap Button on Input
-document.getElementById('from-amount').addEventListener('input', (e) => {
-    const value = parseFloat(e.target.value);
-    document.getElementById('swap-button').disabled = !value || value <= 0;
-});
-
-// Swap Button Click
-document.getElementById('swap-button').addEventListener('click', performSwap);
-
-// Fetch balances when wallet connects
-document.getElementById('connect-wallet').addEventListener('click', () => {
-    if (window.solana && window.solana.publicKey) {
-        fetchBalances(window.solana.publicKey.toString());
-    }
-});
-
 
 /**
  * Toggle the visibility of the fullscreen overlay.
@@ -339,11 +243,8 @@ function displayContent(option) {
 
             `;
             break;
-        case 'trade':
-            case 'truth':
-    content = `<strong>Coming Soon...</strong?`;
-    break;
-
+        case 'truth':
+            content = `<h3 class="content-header">Truth</h3><div id="typewriter-text"></div>`;
             text = `<strong>Coming Soon</strong>`;
             break;
         default:
@@ -466,3 +367,74 @@ function showNotification() {
         notification.className = notification.className.replace('show', '');
     }, 3000);
 }
+
+// Constants
+const RAYDIUM_API_ENDPOINT = "https://api.raydium.io/v2/swap";
+
+// Wallet and Token Swap Logic
+let walletAddress = null;
+
+// Connect Wallet Button
+document.getElementById("connect-wallet").addEventListener("click", async () => {
+    if (window.solana) {
+        try {
+            await window.solana.connect();
+            walletAddress = window.solana.publicKey.toString();
+            document.getElementById("connect-wallet").innerText = "Swap Tokens";
+        } catch (error) {
+            alert("Failed to connect wallet.");
+            console.error(error);
+        }
+    } else {
+        alert("Solana wallet not found! Install Phantom or another wallet.");
+    }
+});
+
+// Perform Swap
+async function performSwap() {
+    const fromToken = document.getElementById("from-token").value;
+    const toToken = document.getElementById("to-token").value;
+    const fromAmount = parseFloat(document.getElementById("from-amount").value);
+
+    if (!walletAddress) {
+        alert("Please connect your wallet first.");
+        return;
+    }
+
+    if (!fromAmount || fromAmount <= 0) {
+        alert("Enter a valid amount to swap.");
+        return;
+    }
+
+    try {
+        const response = await fetch(RAYDIUM_API_ENDPOINT, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                fromToken,
+                toToken,
+                amount: fromAmount,
+                wallet: walletAddress,
+            }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            alert("Swap successful!");
+        } else {
+            alert("Swap failed: " + result.message);
+        }
+    } catch (error) {
+        alert("Error performing swap.");
+        console.error(error);
+    }
+}
+
+// Add Event Listener for Swap Button
+document.getElementById("connect-wallet").addEventListener("click", () => {
+    if (document.getElementById("connect-wallet").innerText === "Swap Tokens") {
+        performSwap();
+    }
+});

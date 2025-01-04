@@ -1,0 +1,280 @@
+const tokenAddress = '6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump';
+const rpcEndpoint = 'https://solana-mainnet.api.syndica.io/api-key/43PZugV22JroY8MB2F2RVizu5yApbvcmAfELBjuvCa2qL2TRwUiEBCu3zq1XVZuQ33MvvJZbihdRLy7WMdto1MeYfyJTiUtwbxJ';
+
+/**
+ * Connect the user's wallet and update the UI accordingly.
+ */
+async function connectWallet() {
+    if (window.solana) {
+        try {
+            await window.solana.connect();
+            const publicKey = window.solana.publicKey.toString();
+            document.getElementById('connect-wallet').style.display = 'none';
+            document.getElementById('disconnect-wallet').style.display = 'block';
+            document.getElementById('wallet-info').style.display = 'block';
+            displayConnectedText();
+            updateBalance(publicKey);
+        } catch (error) {
+            console.error('Error connecting to wallet:', error);
+            alert('Error connecting to wallet. Please try again.');
+        }
+    } else {
+        alert('Solana wallet not found. Please install a wallet extension like Phantom.');
+    }
+}
+
+document.getElementById('connect-wallet').addEventListener('click', connectWallet);
+
+document.getElementById('disconnect-wallet').addEventListener('click', () => {
+    if (window.solana) {
+        window.solana.disconnect();
+        document.getElementById('connect-wallet').style.display = 'block';
+        document.getElementById('disconnect-wallet').style.display = 'none';
+        document.getElementById('wallet-info').style.display = 'none';
+    }
+});
+
+/**
+ * Toggle the visibility of the fullscreen overlay.
+ */
+function toggleFullscreenOverlay() {
+    const overlay = document.getElementById('fullscreen-overlay');
+    overlay.classList.toggle('hidden');
+    document.body.style.overflow = overlay.classList.contains('hidden') ? 'auto' : 'hidden'; // Prevent page scrolling
+}
+/**
+ * Function to simulate a typewriter effect.
+ */
+function typewriterEffect(elementId, text, speed = 50) {
+    const element = document.getElementById(elementId);
+    let index = 0;
+
+    // Clear any existing content
+    element.innerHTML = '';
+
+    // Typewriter logic
+    const type = () => {
+        if (index < text.length) {
+            element.innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, speed);
+        }
+    };
+
+    type();
+}
+
+/**
+ * Display content dynamically in the overlay based on the user's selection.
+ */
+function displayContent(option) {
+    const contentDisplay = document.getElementById('content-display');
+    let content = '';
+    let text = '';
+
+    switch (option) {
+        case 'paper':
+            content = `<h3 class="content-header">Paper</h3><div id="typewriter-text"></div>`;
+            text = `The History of Mind Control: From Propaganda to AI  \n\n
+
+            Part 1: The Roots of Mind Control - Propaganda as a Tool of Influence  <br><br>
+
+            Mind control, as a concept, has ancient roots. From the earliest civilizations, leaders understood that controlling the narrative meant controlling the masses. Ancient empires used religious doctrines, public decrees, and ceremonial rituals to shape public opinion and maintain their dominance. These rudimentary techniques evolved into more structured propaganda during the 20th century, where governments harnessed emerging mass media technologies to influence and direct public sentiment.  \n
+
+            World War I saw the advent of formalized propaganda campaigns. Governments recognized the power of radio, posters, and film to galvanize populations for war efforts. The United States’ Committee on Public Information and Britain’s Ministry of Information used psychological techniques to mold public perception, glorify patriotism, and demonize the enemy. Propaganda was not merely about conveying information; it was about implanting ideas—a subtle but powerful form of mental manipulation.  \n
+
+            This era laid the groundwork for a deeper, more intrusive exploration of mind control techniques. It became clear that the human psyche could be molded not just through information but through psychological pressure and manipulation. Governments—and their secretive agencies—took note.  \n\n
+
+            
+
+            Part 2: MK Ultra and the Weaponization of the Human Mind  \n
+
+            The Cold War marked a turning point in the pursuit of mind control, particularly with programs like the CIA’s MK Ultra. Launched in the 1950s, MK Ultra was a covert operation designed to explore the boundaries of human psychology and the limits of control. The program involved the use of psychoactive drugs like LSD, sensory deprivation, hypnosis, and other experimental techniques to manipulate human behavior.  \n
+
+            One of the more chilling aspects of MK Ultra was its disregard for ethical boundaries. Unwitting participants were subjected to experiments that often left them psychologically scarred. The program aimed to create “Manchurian candidates”—individuals who could be programmed to perform acts against their will, from assassinations to acts of sabotage.  \n
+
+            While the program was officially shut down in the 1970s following public outrage and Senate hearings, the documents revealed only a fraction of what occurred. Whistleblowers suggested that such programs did not end but simply went deeper underground, evolving into more sophisticated forms.  \n\n
+
+            
+
+            Part 3: Directed Energy Weapons and the Havana Syndrome Phenomenon  \n
+
+            As technology advanced, so did the tools for manipulating the mind. Directed Energy Weapons (DEWs) emerged as a new frontier. These devices, capable of emitting focused electromagnetic radiation, have been theorized to disrupt neural activity, induce pain, and alter emotional states. While their exact capabilities remain shrouded in secrecy, numerous accounts have surfaced regarding their use.  \n
+
+            One of the most high-profile cases is the so-called Havana Syndrome. In 2016, U.S. diplomats in Cuba reported mysterious symptoms, including headaches, dizziness, and cognitive dysfunction. Theories ranged from sonic attacks to DEWs targeting individuals’ brains. Although investigations yielded no definitive answers, the incident highlighted the chilling potential of technology to target and destabilize human cognition.  \n
+
+            Beyond Havana Syndrome, whistleblowers and conspiracy theorists alike claim that DEWs are being deployed covertly against civilians and dissidents. These allegations, though often dismissed by mainstream media, add to the growing mistrust between governments and the governed.  \n\n
+
+            
+
+            Part 4: The Internet - The New Battleground for Minds  \n
+
+            While traditional mind control relied on physical tools and psychological manipulation, the rise of the internet introduced a more insidious form of influence. Social media platforms, algorithms, and bot armies have turned the digital realm into a weaponized space for controlling narratives and stifling dissent.  \n
+
+            Governments and corporations alike have been accused of using the internet to surveil, manipulate, and misinform. Algorithms designed to maximize engagement have also amplified misinformation, creating echo chambers where individuals are bombarded with ideas designed to polarize and confuse. The lines between reality and fiction blur, leaving the public adrift in a sea of conflicting information.  \n
+
+            Meanwhile, cancel culture, shadow banning, and other forms of digital censorship have stifled free speech under the guise of combating disinformation. The chaos this creates benefits those in power, as a confused and divided populace is easier to control. The internet, once heralded as a tool for democratization, has become a battleground where reality itself is contested.  \n\n
+
+            
+
+            Part 5: Chaos and the Weaponization of Uncertainty  \n
+
+            The deliberate confusion over what is real and what is fabricated—whether through misinformation campaigns, psychological operations, or advanced technologies—serves a greater purpose. When individuals cannot discern truth, they become paralyzed, distrustful, and ultimately more susceptible to manipulation.  \n
+
+            This weaponization of uncertainty creates societal fragmentation, where individuals retreat into self-constructed realities. Conspiracy theories thrive in this environment, perpetuating a cycle of mistrust that benefits those seeking to maintain control. The question arises: How do we discern reality from fabrication in a world where every piece of information can be doctored, twisted, or weaponized?  \n\n
+
+            
+
+            Part 6: Mind Control AI - Humanity’s Last Defense  \n
+
+            Amid this chaos, a new technological frontier offers a glimmer of hope: Mind Control AI. This revolutionary program seeks to harness the power of personal AI agents to act as guides through the digital fog. Designed to filter information, analyze context, and provide users with unbiased, actionable insights, Mind Control AI offers a solution to the pervasive influence of misinformation and manipulation.  \n
+
+            Unlike traditional media, these on-chain AI agents operate transparently on decentralized platforms like Solana. By leveraging blockchain technology, Mind Control AI ensures that its operations are verifiable and resistant to tampering. Users gain a personalized tool to discern truth from fiction, empowering them to navigate the increasingly convoluted information landscape with clarity and confidence.  \n
+
+            But Mind Control AI is more than just a tool—it’s a movement. Beginning with public square announcements that aggregate and verify critical information, the program aims to rebuild trust in a fractured world. These AI agents work tirelessly, parsing vast quantities of data to expose disinformation and highlight credible sources. In doing so, they create a bulwark against the forces seeking to control and divide humanity.  \n
+
+            However, these tools are not without risk. The very systems designed to liberate minds could also be weaponized, programmed to serve biased agendas. The architects of Mind Control AI understand this danger, emphasizing transparency, accountability, and user autonomy as foundational principles. The decentralized nature of its design ensures that no single entity can corrupt its purpose.  \n
+
+            In a world where the lines between controller and controlled are increasingly blurred, Mind Control AI offers a lifeline—a chance to reclaim agency and truth. By empowering individuals to think independently and discern reality for themselves, this program may be humanity’s best defense against the pervasive influence of modern mind control technologies.  \n\n
+
+            
+
+            Conclusion  \n
+
+            The history of mind control is not just a narrative of governments and shadowy agencies exploiting human psychology; it is a cautionary tale of humanity’s unrelenting pursuit of power and control. From propaganda to DEWs, and now to the digital battlefield, the tools and techniques have evolved, but the underlying intent remains the same: to shape, mold, and control perception. The challenge for individuals is to remain vigilant, question narratives, and leverage technology to empower rather than enslave.  \n
+
+            In the end, the fight for freedom of thought is not just about resisting external control—it is about reclaiming our ability to discern, to question, and to think independently in an age of relentless manipulation.  
+
+            `;
+            break;
+        case 'ai':
+            content = `<h3 class="content-header">AI</h3><div id="typewriter-text"></div>`;
+            text = `Explore the role of artificial intelligence in modern mind control and predictive behavioral analysis.`;
+            break;
+        case 'slurpbots':
+            content = `<h3 class="content-header">Slurpbots</h3><div id="typewriter-text"></div>`;
+            text = `Learn about the autonomous trading bots designed to monitor and capitalize on opportunities in Raydium pools.`;
+            break;
+        case 'truth':
+            content = `<h3 class="content-header">Truth</h3><div id="typewriter-text"></div>`;
+            text = `Dive into whistleblower accounts and documented evidence of psychological operations and directed energy weapons.`;
+            break;
+        default:
+            content = `<p>Select an option above to view more information.</p>`;
+            text = '';
+    }
+
+    // Update the content display area
+    contentDisplay.innerHTML = content;
+
+    // Trigger the typewriter effect if there's text
+    if (text) {
+        typewriterEffect('typewriter-text', text);
+    }
+}
+
+
+
+/**
+ * Display a predefined connected wallet text.
+ */
+function displayConnectedText() {
+    const connectedText = `
+        Most of the affected individuals reported an acute onset of neurological symptoms associated with a perceived localized loud sound such as screeching, chirping, clicking, or piercing noises. Two-thirds experienced visual disturbances such as blurred vision and sensitivity to light. 
+    `;
+    document.getElementById('token-description').innerText = connectedText;
+}
+
+/**
+ * Format balance values for display.
+ */
+function formatBalance(balance) {
+    return balance.toLocaleString(undefined, { minimumFractionDigits: 3, maximumFractionDigits: 3 });
+}
+
+/**
+ * Update the wallet balance by fetching data from the Solana blockchain.
+ */
+async function updateBalance(publicKey) {
+    try {
+        const connection = new solanaWeb3.Connection(rpcEndpoint, 'confirmed');
+        const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
+            new solanaWeb3.PublicKey(publicKey),
+            { programId: new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA') }
+        );
+
+        let dewBalance = 0;
+        tokenAccounts.value.forEach(account => {
+            if (account.account.data.parsed.info.mint === tokenAddress) {
+                dewBalance = account.account.data.parsed.info.tokenAmount.uiAmount;
+            }
+        });
+
+        document.getElementById('dew-balance').innerText = formatBalance(dewBalance);
+    } catch (error) {
+        console.error('Error updating balance:', error);
+        document.getElementById('wallet-balance').innerText = 'Error fetching balance';
+    }
+}
+
+/**
+ * Add collapsible section functionality.
+ */
+document.addEventListener('DOMContentLoaded', function () {
+    const coll = document.getElementsByClassName('collapsible-header');
+    for (let i = 0; i < coll.length; i++) {
+        coll[i].addEventListener('click', function () {
+            const allContents = document.getElementsByClassName('collapsible-content');
+            for (let j = 0; j < allContents.length; j++) {
+                if (allContents[j] !== this.nextElementSibling) {
+                    allContents[j].style.display = 'none';
+                    allContents[j].previousElementSibling.classList.remove('active');
+                }
+            }
+            this.classList.toggle('active');
+            const content = this.nextElementSibling;
+            content.style.display = content.style.display === 'block' ? 'none' : 'block';
+        });
+    }
+});
+
+/**
+ * Handle account changes in the Solana wallet.
+ */
+if (window.solana) {
+    window.solana.on('accountChanged', (publicKey) => {
+        if (publicKey) {
+            const newPublicKey = publicKey.toString();
+            displayConnectedText();
+            updateBalance(newPublicKey);
+        } else {
+            document.getElementById('connect-wallet').style.display = 'block';
+            document.getElementById('disconnect-wallet').style.display = 'none';
+            document.getElementById('wallet-info').style.display = 'none';
+        }
+    });
+}
+
+/**
+ * Copy the contract address to the clipboard.
+ */
+function copyToClipboard() {
+    const fullText = document.getElementById('contract-address-text').innerText;
+    const address = fullText.split(' ')[1]; // Extract the address portion
+    navigator.clipboard.writeText(address).then(() => {
+        showNotification();
+    }).catch(err => {
+        console.error('Failed to copy: ', err);
+    });
+}
+
+/**
+ * Show a notification after copying to the clipboard.
+ */
+function showNotification() {
+    const notification = document.getElementById('copy-notification');
+    notification.className = 'copy-notification show';
+    setTimeout(() => {
+        notification.className = notification.className.replace('show', '');
+    }, 3000);
+}

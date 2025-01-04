@@ -47,16 +47,15 @@ html, body {
 .open-overlay {
   background-color: #f90000; /* Primary button color */
   color: white; /* Text color */
-  font-size: 25px; /* Button text size */
+  font-size: 18px; /* Button text size */
   font-weight: bold; /* Make the text bold */
   padding: 12px 24px; /* Add padding around the button */
   border: none; /* Remove default border */
-  border-radius: 3px; /* Rounded corners */
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   text-transform: uppercase; /* Transform text to uppercase */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  
 }
 
 /* Hover effect */
@@ -95,7 +94,6 @@ html, body {
   visibility: visible;
   opacity: 1;
 }
-
 
 .fullscreen-overlay.hidden {
   visibility: hidden;
@@ -225,10 +223,10 @@ html, body {
 
 .link-container {
   text-align: center;
-  margin: 0px 0;
+  margin: 20px 0;
   display: flex;
   justify-content: center; /* Center the buttons */
-  gap: 20px; /* Add some space between buttons */
+  gap: 5px; /* Add some space between buttons */
 }
 
 .image-container {
@@ -294,7 +292,7 @@ html, body {
 .wallet-info {
   display: flex;
   justify-content: center;
-  margin-top: 0px;
+  margin-top: 20px;
   width: 100%; /* Ensure it takes the full width of the screen */
   padding: 0 20px; /* Add some padding to the left and right */
   box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
@@ -315,7 +313,7 @@ html, body {
 }
 
 #wallet-balance {
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 #wallet-balance span {
@@ -690,3 +688,134 @@ footer {
     to {bottom: 0; opacity: 0;}
 }
 
+/* Modal Overlay Styling */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden; /* Hidden by default */
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Show the modal */
+.modal.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Modal Content Box */
+.modal-content {
+  position: relative;
+  background: white;
+  width: 90%;
+  max-width: 1200px; /* Limit width */
+  height: 80%; /* Take 80% of the viewport height */
+  border-radius: 10px;
+  overflow: hidden; /* Hide content overflow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Close Button */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: #f90000;
+}
+
+/* Iframe for Raydium Platform */
+.modal-content iframe {
+  flex: 1; /* Take up remaining space in the modal */
+  width: 100%; /* Full width */
+  border: none; /* Remove border */
+}
+
+/* Swap Box Styling */
+.swap-box {
+  background-color: #1e1e2d;
+  color: white;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.token-row {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.token-row label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.token-select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28293d;
+  color: white;
+  font-size: 16px;
+}
+
+.token-input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #28293d;
+  color: white;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+.arrow {
+  text-align: center;
+  font-size: 24px;
+  margin: 10px 0;
+}
+
+.swap-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.swap-button:hover {
+  background-color: #45a045;
+}
+
+.swap-button:disabled {
+  background-color: #555;
+  cursor: not-allowed;
+}

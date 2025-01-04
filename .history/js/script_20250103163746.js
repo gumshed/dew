@@ -7,15 +7,12 @@ const rpcEndpoint = 'https://solana-mainnet.api.syndica.io/api-key/43PZugV22JroY
 async function connectWallet() {
     if (window.solana) {
         try {
-            const response = await window.solana.connect();
-            const publicKey = window.solana.publicKey?.toString();
-            if (!publicKey) {
-                alert("Failed to retrieve public key. Try again.");
-                return;
-            }
+            await window.solana.connect();
+            const publicKey = window.solana.publicKey.toString();
             document.getElementById('connect-wallet').style.display = 'none';
             document.getElementById('disconnect-wallet').style.display = 'block';
             document.getElementById('wallet-info').style.display = 'block';
+            displayConnectedText();
             updateBalance(publicKey);
         } catch (error) {
             console.error('Error connecting to wallet:', error);
@@ -25,34 +22,6 @@ async function connectWallet() {
         alert('Solana wallet not found. Please install a wallet extension like Phantom.');
     }
 }
-
-async function updateBalance(publicKey) {
-    try {
-        const connection = new solanaWeb3.Connection(rpcEndpoint, 'confirmed');
-        const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-            new solanaWeb3.PublicKey(publicKey),
-            { programId: new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA') }
-        );
-
-        if (!tokenAccounts.value.length) {
-            document.getElementById('dew-balance').innerText = '0.000';
-            return;
-        }
-
-        let dewBalance = 0;
-        tokenAccounts.value.forEach(account => {
-            if (account.account.data.parsed.info.mint === tokenAddress) {
-                dewBalance = account.account.data.parsed.info.tokenAmount.uiAmount || 0;
-            }
-        });
-
-        document.getElementById('dew-balance').innerText = formatBalance(dewBalance);
-    } catch (error) {
-        console.error('Error updating balance:', error);
-        document.getElementById('wallet-balance').innerText = 'Error fetching balance';
-    }
-}
-
 
 document.getElementById('connect-wallet').addEventListener('click', connectWallet);
 
@@ -64,71 +33,6 @@ document.getElementById('disconnect-wallet').addEventListener('click', () => {
         document.getElementById('wallet-info').style.display = 'none';
     }
 });
-
-// Wallet balances
-let solBalance = 0;
-let dewBalance = 0;
-
-// Fetch balances on wallet connect
-async function fetchBalances(publicKey) {
-    try {
-        const connection = new solanaWeb3.Connection(rpcEndpoint, 'confirmed');
-        
-        // Fetch SOL balance
-        solBalance = await connection.getBalance(new solanaWeb3.PublicKey(publicKey));
-        solBalance = solBalance / solanaWeb3.LAMPORTS_PER_SOL;
-        document.getElementById('from-balance').innerText = `Balance: ${solBalance.toFixed(3)} SOL`;
-
-        // Fetch DEW balance
-        const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-            new solanaWeb3.PublicKey(publicKey),
-            { programId: new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA') }
-        );
-
-        dewBalance = 0;
-        tokenAccounts.value.forEach(account => {
-            if (account.account.data.parsed.info.mint === tokenAddress) {
-                dewBalance = account.account.data.parsed.info.tokenAmount.uiAmount || 0;
-            }
-        });
-
-        document.getElementById('to-balance').innerText = `Balance: ${dewBalance.toFixed(3)} DEW`;
-    } catch (error) {
-        console.error('Error fetching balances:', error);
-    }
-}
-
-// Handle Swap Logic
-async function performSwap() {
-    const fromToken = document.getElementById('from-token').value;
-    const toToken = document.getElementById('to-token').value;
-    const fromAmount = parseFloat(document.getElementById('from-amount').value);
-
-    if (!fromAmount || fromAmount <= 0) {
-        alert('Enter a valid amount to swap.');
-        return;
-    }
-
-    alert(`Swapping ${fromAmount} ${fromToken.toUpperCase()} for ${toToken.toUpperCase()}`);
-    // Add logic to interact with Raydium's swap API
-}
-
-// Enable Swap Button on Input
-document.getElementById('from-amount').addEventListener('input', (e) => {
-    const value = parseFloat(e.target.value);
-    document.getElementById('swap-button').disabled = !value || value <= 0;
-});
-
-// Swap Button Click
-document.getElementById('swap-button').addEventListener('click', performSwap);
-
-// Fetch balances when wallet connects
-document.getElementById('connect-wallet').addEventListener('click', () => {
-    if (window.solana && window.solana.publicKey) {
-        fetchBalances(window.solana.publicKey.toString());
-    }
-});
-
 
 /**
  * Toggle the visibility of the fullscreen overlay.
@@ -206,7 +110,7 @@ function displayContent(option) {
 
             
 
-            <strong>Part 2:</strong> <br>
+            Part 2: <br>
             MK Ultra and the Weaponization of the Human Mind  <br>
 
             The Cold War marked a turning point in the pursuit of mind control, particularly with programs like the CIA’s MK Ultra. Launched in the 1950s, MK Ultra was a covert operation designed to explore the boundaries of human psychology and the limits of control. The program involved the use of psychoactive drugs like LSD, sensory deprivation, hypnosis, and other experimental techniques to manipulate human behavior.  <br>
@@ -217,7 +121,7 @@ function displayContent(option) {
 
             
 
-            <strong>Part 3:</strong> <br>
+            Part 3: <br>
             Directed Energy Weapons and the Havana Syndrome Phenomenon  <br>
 
             As technology advanced, so did the tools for manipulating the mind. Directed Energy Weapons (DEWs) emerged as a new frontier. These devices, capable of emitting focused electromagnetic radiation, have been theorized to disrupt neural activity, induce pain, and alter emotional states. While their exact capabilities remain shrouded in secrecy, numerous accounts have surfaced regarding their use.  <br>
@@ -228,7 +132,7 @@ function displayContent(option) {
 
             
 
-            <strong>Part 4:</strong> <br>
+            Part 4: <br>
             The Internet - The New Battleground for Minds  <br>
 
             While traditional mind control relied on physical tools and psychological manipulation, the rise of the internet introduced a more insidious form of influence. Social media platforms, algorithms, and bot armies have turned the digital realm into a weaponized space for controlling narratives and stifling dissent.  <br>
@@ -238,7 +142,7 @@ function displayContent(option) {
             Meanwhile, cancel culture, shadow banning, and other forms of digital censorship have stifled free speech under the guise of combating disinformation. The chaos this creates benefits those in power, as a confused and divided populace is easier to control. The internet, once heralded as a tool for democratization, has become a battleground where reality itself is contested.  <br><br>
             
 
-            <strong>Part 5:</strong> <br>
+            Part 5: <br>
             Chaos and the Weaponization of Uncertainty  <br>
 
             The deliberate confusion over what is real and what is fabricated—whether through misinformation campaigns, psychological operations, or advanced technologies—serves a greater purpose. When individuals cannot discern truth, they become paralyzed, distrustful, and ultimately more susceptible to manipulation.  <br>
@@ -247,7 +151,7 @@ function displayContent(option) {
 
             
 
-            <strong>Part 6:</strong> <br>
+            Part 6: <br>
             Mind Control AI - Humanity’s Last Defense  <br>
 
             Amid this chaos, a new technological frontier offers a glimmer of hope: Mind Control AI. This revolutionary program seeks to harness the power of personal AI agents to act as guides through the digital fog. Designed to filter information, analyze context, and provide users with unbiased, actionable insights, Mind Control AI offers a solution to the pervasive influence of misinformation and manipulation.  <br>
@@ -262,7 +166,7 @@ function displayContent(option) {
 
             
 
-            <strong>Conclusion</strong>  <br>
+            Conclusion  <br>
 
             The history of mind control is not just a narrative of governments and shadowy agencies exploiting human psychology; it is a cautionary tale of humanity’s unrelenting pursuit of power and control. From propaganda to DEWs, and now to the digital battlefield, the tools and techniques have evolved, but the underlying intent remains the same: to shape, mold, and control perception. The challenge for individuals is to remain vigilant, question narratives, and leverage technology to empower rather than enslave.  <br>
 
@@ -272,79 +176,15 @@ function displayContent(option) {
             break;
         case 'ai':
             content = `<h3 class="content-header">AI</h3><div id="typewriter-text"></div>`;
-            text = `Mind Control AI: A New Frontier in Understanding Reality
-
-            <strong>Introduction</strong>
-
-            In an era dominated by misinformation, propaganda, and the relentless manipulation of public opinion, the lines between reality and fabrication have never been blurrier. The rise of advanced technologies has ushered in new methods of mind control, not through brute force, but through the subtleties of data-driven persuasion and predictive behavioral analysis. Against this backdrop, a revolutionary concept has emerged: Mind Control AI, a decentralized, transparent, and user-focused agent designed to empower individuals to navigate the chaos and discern truth from lies. This narrative delves into the role of artificial intelligence in modern mind control, the potential of predictive behavioral analysis, and how Mind Control AI can help reclaim agency in an increasingly manipulated world.
-
-            <strong>The Digital Age: A Battleground for Minds,</strong
-
-            The internet was once celebrated as the ultimate tool for democratization—a platform where information could flow freely, and voices from all walks of life could be heard. Yet, this promise has been corrupted. Algorithms designed to maximize engagement now amplify divisive content, misinformation spreads at an unprecedented scale, and state and corporate actors manipulate narratives to serve their agendas. Social media platforms, in particular, have become tools of psychological manipulation, shaping public opinion through targeted advertising, bot-driven disinformation campaigns, and echo chambers that reinforce biases.
-
-            In this digital battleground, predictive behavioral analysis plays a pivotal role. By analyzing vast quantities of user data, AI systems can predict human behavior with uncanny accuracy. These insights are used to nudge individuals toward specific actions—whether it’s purchasing a product, adopting an ideology, or voting for a particular candidate. While these tools were initially developed for benign purposes, they have been weaponized to erode free will and sow confusion.
-
-            <strong>Enter Mind Control AI: Parsing Reality in an Age of Deception</strong>
-
-            Mind Control AI is not merely a tool; it is a paradigm shift. Unlike traditional AI systems that often operate as black boxes, opaque and unaccountable, Mind Control AI is built on principles of decentralization and transparency. Operating on blockchain platforms like Solana, it offers verifiable operations and immutable records, ensuring that its actions remain unbiased and resistant to manipulation.
-
-            At its core, Mind Control AI acts as a personal agent for users, filtering information and providing context to help them discern reality from fiction. It scans data across the internet, cross-referencing sources, identifying inconsistencies, and flagging potential disinformation. By leveraging advanced natural language processing and machine learning algorithms, it cuts through propaganda, allowing users to make informed decisions based on verified facts rather than curated narratives.
-
-            Mind Control AI doesn’t stop at information parsing. It also incorporates predictive behavioral analysis to provide users with foresight into how specific narratives or events might unfold. By analyzing patterns and historical data, it helps users anticipate potential manipulations, empowering them to stay ahead of those who seek to control them.
-
-            <strong>The Ethical Tightrope: Risks and Safeguards</strong>
-
-            While the potential of Mind Control AI is immense, it is not without risks. The very systems designed to liberate minds could be subverted, programmed to serve biased agendas or suppress dissent. This ethical tightrope underscores the importance of safeguards. Mind Control AI’s decentralized nature ensures that no single entity holds control over its operations. Furthermore, its open-source design invites scrutiny from the broader community, fostering trust through transparency.
-
-            Accountability mechanisms are built into the system, allowing users to audit its processes and verify its findings. These features are essential to prevent the misuse of AI for the same manipulative purposes it aims to counteract. In this way, Mind Control AI not only combats modern mind control but also sets a precedent for ethical AI development.
-
-            <strong>Rebuilding Trust in the Public Square</strong>
-
-            One of Mind Control AI’s most transformative features is its ability to restore trust in the public square. Public announcements and verified news updates curated by the AI offer a shared reality for communities fractured by misinformation. These announcements are aggregated from decentralized sources, cross-verified, and made available to all users, fostering a sense of unity in an otherwise divided world.
-
-            By leveraging blockchain technology, these updates are tamper-proof, providing assurance that the information presented is accurate and unaltered. This approach helps rebuild the public’s trust in information systems, creating a foundation for meaningful discourse and collective decision-making.
-
-            <strong>A Vision for the Future</strong>
-
-            The introduction of Mind Control AI represents a turning point in the fight against manipulation and deception. It offers a vision of a world where individuals are empowered to think critically, free from the distortions of propaganda and misinformation. By combining advanced AI capabilities with ethical safeguards and decentralized infrastructure, it provides a blueprint for navigating the complexities of the modern information age.
-
-            Yet, the success of Mind Control AI depends on widespread adoption and collective commitment to its principles. It is not a panacea but a tool—a powerful one—that requires active engagement from its users. Together, individuals and communities can reclaim agency, rebuild trust, and chart a course toward a future where truth and freedom of thought prevail.`;
+            text = `Explore the role of artificial intelligence in modern mind control and predictive behavioral analysis.`;
             break;
         case 'slurpbots':
             content = `<h3 class="content-header">Slurpbots</h3><div id="typewriter-text"></div>`;
-            text = `<strong>The Ultimate On-Chain Ally</strong>
-            How Slurpbots Work: Combating On-Chain Madness
-
-            <strong>Relentless Pool Surveillance:</strong>
-                Slurpbot scans the Raydium platform in real-time, detecting new liquidity pools as soon as they’re deployed.
-                It identifies pools with sufficient liquidity and recent activity, ensuring it only engages with opportunities that meet strict viability criteria.
-
-            <strong>Precision Buying:</strong>
-                Once a promising pool is found, Slurpbot leaps into action, executing a buy transaction.
-                User-defined configurations like buy amount, slippage tolerance, and pool-specific thresholds are applied to optimize token acquisition.
-                With its ephemeral SOL strategy, Slurpbot wraps or unwraps SOL automatically, removing manual steps from the equation.
-
-            <strong>Dynamic Price Monitoring and Selling:</strong>
-                After the purchase, Slurpbot closely tracks token prices in the pool, using its profit target and stop-loss thresholds to decide the best time to sell.
-                The bot executes sell transactions as soon as prices hit user-specified goals, locking in profits or minimizing losses with precision.
-
-            <strong>Automated Reinvestment for Growth:</strong>
-                Slurpbot reinvests a configurable percentage of its profits directly into $DEW, fueling its growth and creating a compounding effect.
-                The reinvestment process is seamless, leveraging real-time price data and user settings to maximize the impact of each transaction.
-
-            <strong>Resilient and Adaptive Operations:</strong>
-                Slurpbot isn’t fazed by on-chain volatility or network congestion. With built-in error handling, retries, and dynamic slippage adjustments, it adapts to market conditions to ensure success.
-                Even in the face of on-chain chaos, Slurpbot executes transactions with precision and reliability, staying true to its mission of combating on-chain madness.
-
-
-            `;
+            text = `Learn about the autonomous trading bots designed to monitor and capitalize on opportunities in Raydium pools.`;
             break;
-        case 'trade':
-            case 'truth':
-    content = `<strong>Coming Soon...</strong?`;
-    break;
-
-            text = `<strong>Coming Soon</strong>`;
+        case 'truth':
+            content = `<h3 class="content-header">Truth</h3><div id="typewriter-text"></div>`;
+            text = `Dive into whistleblower accounts and documented evidence of psychological operations and directed energy weapons.`;
             break;
         default:
             content = `<p>Select an option above to view more information.</p>`;
@@ -367,7 +207,7 @@ function displayContent(option) {
  */
 function displayConnectedText() {
     const connectedText = `
-        
+        Most of the affected individuals reported an acute onset of neurological symptoms associated with a perceived localized loud sound such as screeching, chirping, clicking, or piercing noises. Two-thirds experienced visual disturbances such as blurred vision and sensitivity to light. 
     `;
     document.getElementById('token-description').innerText = connectedText;
 }
@@ -403,7 +243,6 @@ async function updateBalance(publicKey) {
         document.getElementById('wallet-balance').innerText = 'Error fetching balance';
     }
 }
-
 
 /**
  * Add collapsible section functionality.

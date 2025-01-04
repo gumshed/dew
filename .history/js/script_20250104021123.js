@@ -16,7 +16,9 @@ async function connectWallet() {
             document.getElementById('connect-wallet').style.display = 'none';
             document.getElementById('disconnect-wallet').style.display = 'block';
             document.getElementById('wallet-info').style.display = 'block';
-            updateBalance(publicKey);
+            document.getElementById('dew-balance').innerText = 'Fetching...';
+            
+            await fetchBalances(publicKey); // Update balances
         } catch (error) {
             console.error('Error connecting to wallet:', error);
             alert('Error connecting to wallet. Please try again.');
@@ -25,6 +27,8 @@ async function connectWallet() {
         alert('Solana wallet not found. Please install a wallet extension like Phantom.');
     }
 }
+await fetchBalances(publicKey);
+
 
 async function updateBalance(publicKey) {
     try {
@@ -104,14 +108,31 @@ async function performSwap() {
     const toToken = document.getElementById('to-token').value;
     const fromAmount = parseFloat(document.getElementById('from-amount').value);
 
+    if (!window.solana || !window.solana.publicKey) {
+        alert('Please connect your wallet first.');
+        return;
+    }
+
     if (!fromAmount || fromAmount <= 0) {
         alert('Enter a valid amount to swap.');
         return;
     }
 
+    const publicKey = window.solana.publicKey.toString();
     alert(`Swapping ${fromAmount} ${fromToken.toUpperCase()} for ${toToken.toUpperCase()}`);
-    // Add logic to interact with Raydium's swap API
+
+    try {
+        // Raydium swap logic would go here
+        console.log(`Performing swap with wallet: ${publicKey}`);
+        console.log(`From: ${fromToken}, To: ${toToken}, Amount: ${fromAmount}`);
+        // Placeholder API interaction
+        alert("Swap functionality is under development.");
+    } catch (error) {
+        console.error("Error performing swap:", error);
+        alert("Swap failed. Please try again.");
+    }
 }
+
 
 // Enable Swap Button on Input
 document.getElementById('from-amount').addEventListener('input', (e) => {
@@ -128,6 +149,15 @@ document.getElementById('connect-wallet').addEventListener('click', () => {
         fetchBalances(window.solana.publicKey.toString());
     }
 });
+
+function toggleSwapButton() {
+    const fromAmount = parseFloat(document.getElementById('from-amount').value);
+    const isWalletConnected = window.solana && window.solana.publicKey;
+    document.getElementById('swap-button').disabled = !isWalletConnected || !fromAmount || fromAmount <= 0;
+}
+
+// Add Event Listener for Input Changes
+document.getElementById('from-amount').addEventListener('input', toggleSwapButton);
 
 
 /**
@@ -340,8 +370,38 @@ function displayContent(option) {
             `;
             break;
         case 'trade':
-            case 'truth':
-    content = `<strong>Coming Soon...</strong?`;
+            case 'trade':
+    content = `
+        <h3 class="content-header">Trade</h3>
+        <div class="swap-box">
+            <!-- From Section -->
+            <div class="token-row">
+                <label for="from-token">From</label>
+                <select id="from-token" class="token-select">
+                    <option value="sol">SOL</option>
+                    <option value="dew">DEW</option>
+                </select>
+                <input type="number" id="from-amount" placeholder="0" class="token-input" min="0" />
+                <p class="balance-info" id="from-balance">Balance: 0</p>
+            </div>
+
+            <!-- Swap Arrow -->
+            <div class="arrow">↓</div>
+
+            <!-- To Section -->
+            <div class="token-row">
+                <label for="to-token">To</label>
+                <select id="to-token" class="token-select">
+                    <option value="dew">DEW</option>
+                    <option value="sol">SOL</option>
+                </select>
+                <input type="number" id="to-amount" placeholder="0" class="token-input" min="0" disabled />
+                <p class="balance-info" id="to-balance">Balance: 0</p>
+            </div>
+
+            <!-- Swap Button -->
+            <button id="swap-button" class="swap-button" disabled>Swap</button>
+        </div>`;
     break;
 
             text = `<strong>Coming Soon</strong>`;

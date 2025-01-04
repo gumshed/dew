@@ -16,18 +16,6 @@
         <div class="overlay-box">
           <button class="close-overlay" onclick="toggleFullscreenOverlay()">×</button>
           <h2>Welcome Citizen</h2>
-          <div class="link-container">
-            <button id="connect-wallet" class="wallet-button">Connect Wallet</button>
-            <button id="disconnect-wallet" class="wallet-button" style="display:none;">Disconnect Wallet</button>
-        </div>
-        <div id="wallet-info" class="wallet-info" style="display:none;">
-            
-                
-                <div id="wallet-balance">
-                    <p>Your DEW Balance: <span id="dew-balance">0</span></p>
-                </div>
-            
-        </div>
           <div class="options-container">
             <button class="option-button" onclick="displayContent('paper')">Paper</button>
             <button class="option-button" onclick="displayContent('ai')">AI</button>
@@ -42,19 +30,31 @@
       
 <button class="open-overlay" onclick="toggleFullscreenOverlay()">Protect Yourself</button>
 
-
-
     
     <div class="container">
         <div class="header">
             <h1>Mind Control</h1>
         </div>
-        
+        <div class="link-container">
+            <button id="connect-wallet" class="wallet-button">Connect Wallet</button>
+            <button id="disconnect-wallet" class="wallet-button" style="display:none;">Disconnect Wallet</button>
+        </div>
+        <div id="wallet-info" class="wallet-info" style="display:none;">
+            <div class="metadata-container">
+                <h2>Welcome Citizen</h2>
+                <div id="token-metadata">
+                    <p id="token-description"></p>
+                </div>
+                <div id="wallet-balance">
+                    <p>Your DEW Balance: <span id="dew-balance">0</span></p>
+                </div>
+            </div>
+        </div>
         <div class="image-container">
             <img src="img/178.png" alt="Mind Control Image" class="shake-image">
         </div>
         <div class="buy-dew-container">
-            <button class="buy-dew-button" onclick="window.location.href='https://raydium.io/swap/?inputMint=sol&outputMint=6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump'">Buy $DEW</button>
+            <button class="buy-dew-button" onclick="window.location.href='https://pump.fun/6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump'">Buy $DEW</button>
             <div class="contract-address">
                 <span id="contract-address-text" onclick="copyToClipboard()">ca: 6SDeUL3x3DiWyUiXaHT7ftzYkb8t6YAeHxXigtyapump</span>
             </div>
@@ -83,12 +83,9 @@
             </div>
         </div>
 
-        
-        
-
         <div class="content">
             <section id="mind-control-mechanisms" class="metadata-container">
-                <h2>Methods of Mind Control</h2>
+                <h2>Mechanisms of Mind Control with DEWS</h2>
                 <ul class="collapsible-list">
                     <li class="collapsible-list-item">
                         <button class="collapsible-header">1. Electromagnetic Wave Interaction with Neural Activity</button>

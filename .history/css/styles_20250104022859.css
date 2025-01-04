@@ -49,14 +49,13 @@ html, body {
   color: white; /* Text color */
   font-size: 25px; /* Button text size */
   font-weight: bold; /* Make the text bold */
-  padding: 12px 24px; /* Add padding around the button */
+  padding: 12px 44px; /* Add padding around the button */
   border: none; /* Remove default border */
-  border-radius: 3px; /* Rounded corners */
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   text-transform: uppercase; /* Transform text to uppercase */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  
 }
 
 /* Hover effect */

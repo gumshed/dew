@@ -47,16 +47,15 @@ html, body {
 .open-overlay {
   background-color: #f90000; /* Primary button color */
   color: white; /* Text color */
-  font-size: 25px; /* Button text size */
+  font-size: 18px; /* Button text size */
   font-weight: bold; /* Make the text bold */
   padding: 12px 24px; /* Add padding around the button */
   border: none; /* Remove default border */
-  border-radius: 3px; /* Rounded corners */
+  border-radius: 8px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
   text-transform: uppercase; /* Transform text to uppercase */
   transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  
 }
 
 /* Hover effect */
@@ -96,7 +95,6 @@ html, body {
   opacity: 1;
 }
 
-
 .fullscreen-overlay.hidden {
   visibility: hidden;
   opacity: 0;
@@ -125,7 +123,6 @@ html, body {
   max-width: 500px; /* Limit the box width */
   max-height: 80vh; /* Limit the height */
   overflow-y: auto; /* Enable scrolling for long content */
-  overflow-x: hidden;
   text-align: center; /* Center content horizontally */
   position: relative;
   border: 2px solid #f90000; /* Box border */
@@ -206,6 +203,14 @@ html, body {
   text-transform: capitalize; /* Ensure 'Paper' and other titles are capitalized */
 }
 
+#typewriter-text {
+  white-space: normal; /* Override pre-wrap */
+  word-wrap: break-word; /* Force wrapping */
+  text-align: left; /* Keep text aligned to the left */
+  margin: 0; /* Remove any inherited margins */
+  padding: 0; /* Remove padding */
+  line-height: 1.5; /* Adjust line spacing for clarity */
+}
 
 
 /* Typewriter text styles */
@@ -225,10 +230,10 @@ html, body {
 
 .link-container {
   text-align: center;
-  margin: 0px 0;
+  margin: 20px 0;
   display: flex;
   justify-content: center; /* Center the buttons */
-  gap: 20px; /* Add some space between buttons */
+  gap: 10px; /* Add some space between buttons */
 }
 
 .image-container {
@@ -294,7 +299,7 @@ html, body {
 .wallet-info {
   display: flex;
   justify-content: center;
-  margin-top: 0px;
+  margin-top: 20px;
   width: 100%; /* Ensure it takes the full width of the screen */
   padding: 0 20px; /* Add some padding to the left and right */
   box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
@@ -315,7 +320,7 @@ html, body {
 }
 
 #wallet-balance {
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 #wallet-balance span {
@@ -333,7 +338,8 @@ html, body {
   border-radius: 5px;
   text-decoration: none;
   font-size: 18px;
-  
+  animation: blinkAnimation 1s infinite; /* Apply the blinking effect */
+  transition: background-color 0.3s;
 }
 
 .buy-dew-button:hover, .wallet-button:hover {
@@ -689,4 +695,3 @@ footer {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
-

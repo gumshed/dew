@@ -43,42 +43,6 @@ html, body {
   87.5% { background-color: pink; }
 }
 
-/* Style for the Protect Yourself button */
-.open-overlay {
-  background-color: #f90000; /* Primary button color */
-  color: white; /* Text color */
-  font-size: 25px; /* Button text size */
-  font-weight: bold; /* Make the text bold */
-  padding: 12px 24px; /* Add padding around the button */
-  border: none; /* Remove default border */
-  border-radius: 3px; /* Rounded corners */
-  cursor: pointer; /* Pointer cursor on hover */
-  text-transform: uppercase; /* Transform text to uppercase */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
-  
-}
-
-/* Hover effect */
-.open-overlay:hover {
-  background-color: #c70000; /* Darker shade on hover */
-  transform: scale(1.05); /* Slightly enlarge button */
-}
-
-/* Active state (when clicked) */
-.open-overlay:active {
-  background-color: #a50000; /* Even darker shade when pressed */
-  transform: scale(0.95); /* Slightly shrink button */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Reduce shadow for a pressed effect */
-}
-
-/* Focused state (keyboard navigation) */
-.open-overlay:focus {
-  outline: 2px solid #ff4747; /* Add an outline for accessibility */
-  outline-offset: 4px; /* Offset the outline slightly */
-}
-
-
 /* Fullscreen dimmed background */
 .fullscreen-overlay {
   position: fixed;
@@ -88,21 +52,23 @@ html, body {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6); /* Dim background */
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center;
+  align-items: center;
   z-index: 1000;
-  transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transitions */
+  transition: opacity 0.3s ease;
   visibility: visible;
   opacity: 1;
 }
-
-
-.fullscreen-overlay.hidden {
-  visibility: hidden;
-  opacity: 0;
+/* Typewriter text styles */
+#typewriter-text {
+  white-space: pre-wrap; /* Preserve line breaks */
+  font-family: 'Courier New', Courier, monospace; /* Typewriter-like font */
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
 }
 
-/* Typewriter blinking cursor */
+/* Optional blinking cursor */
 #typewriter-text::after {
   content: '|';
   display: inline-block;
@@ -112,8 +78,14 @@ html, body {
 
 @keyframes blink {
   50% {
-    opacity: 0;
+      opacity: 0;
   }
+}
+
+
+.fullscreen-overlay.hidden {
+  visibility: hidden;
+  opacity: 0;
 }
 
 /* Centered box */
@@ -122,18 +94,15 @@ html, body {
   padding: 30px;
   border-radius: 10px;
   width: 90%;
-  max-width: 500px; /* Limit the box width */
-  max-height: 80vh; /* Limit the height */
-  overflow-y: auto; /* Enable scrolling for long content */
-  overflow-x: hidden;
-  text-align: center; /* Center content horizontally */
+  max-width: 600px;
+  max-height: 80vh; /* Limit height to 80% of the viewport */
+  overflow-y: auto; /* Enable vertical scrolling for long content */
+  text-align: left; /* Align text for readability */
+  border: 2px solid #f90000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  border: 2px solid #f90000; /* Box border */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for depth */
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Align children horizontally */
 }
+
 
 /* Close button */
 .close-overlay {
@@ -155,11 +124,10 @@ html, body {
 /* Options container */
 .options-container {
   display: flex;
-  justify-content: center; /* Center buttons horizontally */
-  gap: 10px; /* Add spacing between buttons */
+  justify-content: space-between;
+  gap: 10px;
   margin: 20px 0;
   flex-wrap: wrap; /* Wrap buttons on smaller screens */
-  width: 100%; /* Ensure container spans full width */
 }
 
 /* Option buttons */
@@ -173,62 +141,32 @@ html, body {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth hover effects */
+  transition: background-color 0.3s;
   min-width: 100px; /* Prevent buttons from getting too small */
-  text-align: center;
 }
 
 .option-button:hover {
   background-color: #c70000;
-  transform: scale(1.05); /* Slightly enlarge button on hover */
 }
 
 /* Content display area */
 .content-display {
-  width: 100%; /* Take full width of the overlay box */
   margin-top: 20px;
   padding: 10px;
   background-color: #f9f9f9;
   border-radius: 5px;
   border: 1px solid #ccc;
   font-size: 16px;
-  text-align: left; /* Align text to the left for readability */
-  overflow-y: auto; /* Enable vertical scrolling for long content */
-  word-wrap: break-word; /* Prevent text overflow */
-}
-
-/* Center alignment for section headers in the content */
-.content-display h3.content-header {
-  text-align: center; /* Ensure the header is centered */
-  margin-bottom: 15px; /* Add spacing below the header */
-  font-size: 20px;
-  font-weight: bold;
-  text-transform: capitalize; /* Ensure 'Paper' and other titles are capitalized */
-}
-
-
-
-/* Typewriter text styles */
-#typewriter-text {
-  white-space: pre-wrap; /* Preserve line breaks */
-  word-wrap: break-word; /* Break long words to prevent overflow */
-  font-family: 'Courier New', Courier, monospace; /* Typewriter-like font */
-  font-size: 16px;
-  line-height: 1.5;
-  color: #333;
-  margin: 0; /* Remove any default margins */
-  padding: 0; /* Remove any default padding */
-  text-align: left; /* Keep text left-aligned */
-  text-indent: 0; /* Ensure no indentation for new lines */
+  text-align: center;
 }
 
 
 .link-container {
   text-align: center;
-  margin: 0px 0;
+  margin: 20px 0;
   display: flex;
   justify-content: center; /* Center the buttons */
-  gap: 20px; /* Add some space between buttons */
+  gap: 10px; /* Add some space between buttons */
 }
 
 .image-container {
@@ -294,7 +232,7 @@ html, body {
 .wallet-info {
   display: flex;
   justify-content: center;
-  margin-top: 0px;
+  margin-top: 20px;
   width: 100%; /* Ensure it takes the full width of the screen */
   padding: 0 20px; /* Add some padding to the left and right */
   box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
@@ -315,7 +253,7 @@ html, body {
 }
 
 #wallet-balance {
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 #wallet-balance span {
@@ -333,7 +271,8 @@ html, body {
   border-radius: 5px;
   text-decoration: none;
   font-size: 18px;
-  
+  animation: blinkAnimation 1s infinite; /* Apply the blinking effect */
+  transition: background-color 0.3s;
 }
 
 .buy-dew-button:hover, .wallet-button:hover {
@@ -689,4 +628,3 @@ footer {
     from {bottom: 30px; opacity: 1;}
     to {bottom: 0; opacity: 0;}
 }
-

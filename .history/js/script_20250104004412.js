@@ -7,15 +7,12 @@ const rpcEndpoint = 'https://solana-mainnet.api.syndica.io/api-key/43PZugV22JroY
 async function connectWallet() {
     if (window.solana) {
         try {
-            const response = await window.solana.connect();
-            const publicKey = window.solana.publicKey?.toString();
-            if (!publicKey) {
-                alert("Failed to retrieve public key. Try again.");
-                return;
-            }
+            await window.solana.connect();
+            const publicKey = window.solana.publicKey.toString();
             document.getElementById('connect-wallet').style.display = 'none';
             document.getElementById('disconnect-wallet').style.display = 'block';
             document.getElementById('wallet-info').style.display = 'block';
+            displayConnectedText();
             updateBalance(publicKey);
         } catch (error) {
             console.error('Error connecting to wallet:', error);
@@ -25,34 +22,6 @@ async function connectWallet() {
         alert('Solana wallet not found. Please install a wallet extension like Phantom.');
     }
 }
-
-async function updateBalance(publicKey) {
-    try {
-        const connection = new solanaWeb3.Connection(rpcEndpoint, 'confirmed');
-        const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-            new solanaWeb3.PublicKey(publicKey),
-            { programId: new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA') }
-        );
-
-        if (!tokenAccounts.value.length) {
-            document.getElementById('dew-balance').innerText = '0.000';
-            return;
-        }
-
-        let dewBalance = 0;
-        tokenAccounts.value.forEach(account => {
-            if (account.account.data.parsed.info.mint === tokenAddress) {
-                dewBalance = account.account.data.parsed.info.tokenAmount.uiAmount || 0;
-            }
-        });
-
-        document.getElementById('dew-balance').innerText = formatBalance(dewBalance);
-    } catch (error) {
-        console.error('Error updating balance:', error);
-        document.getElementById('wallet-balance').innerText = 'Error fetching balance';
-    }
-}
-
 
 document.getElementById('connect-wallet').addEventListener('click', connectWallet);
 
@@ -64,71 +33,6 @@ document.getElementById('disconnect-wallet').addEventListener('click', () => {
         document.getElementById('wallet-info').style.display = 'none';
     }
 });
-
-// Wallet balances
-let solBalance = 0;
-let dewBalance = 0;
-
-// Fetch balances on wallet connect
-async function fetchBalances(publicKey) {
-    try {
-        const connection = new solanaWeb3.Connection(rpcEndpoint, 'confirmed');
-        
-        // Fetch SOL balance
-        solBalance = await connection.getBalance(new solanaWeb3.PublicKey(publicKey));
-        solBalance = solBalance / solanaWeb3.LAMPORTS_PER_SOL;
-        document.getElementById('from-balance').innerText = `Balance: ${solBalance.toFixed(3)} SOL`;
-
-        // Fetch DEW balance
-        const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
-            new solanaWeb3.PublicKey(publicKey),
-            { programId: new solanaWeb3.PublicKey('TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA') }
-        );
-
-        dewBalance = 0;
-        tokenAccounts.value.forEach(account => {
-            if (account.account.data.parsed.info.mint === tokenAddress) {
-                dewBalance = account.account.data.parsed.info.tokenAmount.uiAmount || 0;
-            }
-        });
-
-        document.getElementById('to-balance').innerText = `Balance: ${dewBalance.toFixed(3)} DEW`;
-    } catch (error) {
-        console.error('Error fetching balances:', error);
-    }
-}
-
-// Handle Swap Logic
-async function performSwap() {
-    const fromToken = document.getElementById('from-token').value;
-    const toToken = document.getElementById('to-token').value;
-    const fromAmount = parseFloat(document.getElementById('from-amount').value);
-
-    if (!fromAmount || fromAmount <= 0) {
-        alert('Enter a valid amount to swap.');
-        return;
-    }
-
-    alert(`Swapping ${fromAmount} ${fromToken.toUpperCase()} for ${toToken.toUpperCase()}`);
-    // Add logic to interact with Raydium's swap API
-}
-
-// Enable Swap Button on Input
-document.getElementById('from-amount').addEventListener('input', (e) => {
-    const value = parseFloat(e.target.value);
-    document.getElementById('swap-button').disabled = !value || value <= 0;
-});
-
-// Swap Button Click
-document.getElementById('swap-button').addEventListener('click', performSwap);
-
-// Fetch balances when wallet connects
-document.getElementById('connect-wallet').addEventListener('click', () => {
-    if (window.solana && window.solana.publicKey) {
-        fetchBalances(window.solana.publicKey.toString());
-    }
-});
-
 
 /**
  * Toggle the visibility of the fullscreen overlay.
@@ -274,7 +178,7 @@ function displayContent(option) {
             content = `<h3 class="content-header">AI</h3><div id="typewriter-text"></div>`;
             text = `Mind Control AI: A New Frontier in Understanding Reality
 
-            <strong>Introduction</strong>
+            Introduction
 
             In an era dominated by misinformation, propaganda, and the relentless manipulation of public opinion, the lines between reality and fabrication have never been blurrier. The rise of advanced technologies has ushered in new methods of mind control, not through brute force, but through the subtleties of data-driven persuasion and predictive behavioral analysis. Against this backdrop, a revolutionary concept has emerged: Mind Control AI, a decentralized, transparent, and user-focused agent designed to empower individuals to navigate the chaos and discern truth from lies. This narrative delves into the role of artificial intelligence in modern mind control, the potential of predictive behavioral analysis, and how Mind Control AI can help reclaim agency in an increasingly manipulated world.
 
@@ -339,12 +243,9 @@ function displayContent(option) {
 
             `;
             break;
-        case 'trade':
-            case 'truth':
-    content = `<strong>Coming Soon...</strong?`;
-    break;
-
-            text = `<strong>Coming Soon</strong>`;
+        case 'truth':
+            content = `<h3 class="content-header">Truth</h3><div id="typewriter-text"></div>`;
+            text = `Dive into whistleblower accounts and documented evidence of psychological operations and directed energy weapons.`;
             break;
         default:
             content = `<p>Select an option above to view more information.</p>`;
@@ -367,7 +268,7 @@ function displayContent(option) {
  */
 function displayConnectedText() {
     const connectedText = `
-        
+        Most of the affected individuals reported an acute onset of neurological symptoms associated with a perceived localized loud sound such as screeching, chirping, clicking, or piercing noises. Two-thirds experienced visual disturbances such as blurred vision and sensitivity to light. 
     `;
     document.getElementById('token-description').innerText = connectedText;
 }
@@ -403,7 +304,6 @@ async function updateBalance(publicKey) {
         document.getElementById('wallet-balance').innerText = 'Error fetching balance';
     }
 }
-
 
 /**
  * Add collapsible section functionality.

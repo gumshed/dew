@@ -1,0 +1,290 @@
+/* General body and html styling */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Rubik Mono One', monospace;
+  overflow-x: hidden;
+  background-color: white !important;
+  color: black;
+}
+
+/* Main container */
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+  padding-bottom: 60px;
+}
+
+/* Header styling */
+.header {
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 24px;
+  background-color: blue;
+  animation: colorCycle 2s infinite linear;
+  border: 10px solid white;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+@keyframes colorCycle {
+  0%, 100% { background-color: blue; }
+  12.5% { background-color: green; }
+  25% { background-color: violet; }
+  37.5% { background-color: red; }
+  50% { background-color: yellow; }
+  62.5% { background-color: orange; }
+  75% { background-color: teal; }
+  87.5% { background-color: pink; }
+}
+
+/* Fullscreen overlay */
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.fullscreen-overlay.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Overlay box */
+.overlay-box {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  text-align: left;
+  border: 2px solid #f90000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+/* Close button */
+.close-overlay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-overlay:hover {
+  color: #f90000;
+}
+
+/* Options container */
+.options-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+/* Option buttons */
+.option-button {
+  flex: 1;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #f90000;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+  min-width: 100px;
+}
+
+.option-button:hover {
+  background-color: #c70000;
+}
+
+/* Dynamic content display */
+.content-display {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Typewriter effect */
+#typewriter-text {
+  white-space: pre-wrap;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+#typewriter-text::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 5px;
+  animation: blink 0.7s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Link container */
+.link-container {
+  text-align: center;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Image container */
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  margin: 30px 0;
+  box-sizing: border-box;
+}
+
+.shake-image {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  animation: shake 0.2s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0); }
+  10% { transform: translate(-5px, -3px) rotate(-3deg); }
+  20% { transform: translate(5px, 3px) rotate(3deg); }
+  30% { transform: translate(-5px, 5px) rotate(-3deg); }
+  40% { transform: translate(5px, -5px) rotate(3deg); }
+}
+
+/* Footer styling */
+footer {
+  background-color: #f1f1f1;
+  text-align: center;
+  padding: 10px 0;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.footer-links a:hover {
+  color: #555;
+}
+
+/* Scrolling banner */
+.scrolling-banner {
+  position: relative;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #a09e9e;
+  color: #000;
+  padding: 10px 0;
+  box-sizing: border-box;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Scrolling text */
+.scrolling-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: scrollText 55s linear infinite;
+}
+
+@keyframes scrollText {
+  0% {
+    transform: translateX(60%);
+  }
+  100% {
+    transform: translateX(-60%);
+  }
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  .metadata-container {
+    padding: 10px;
+  }
+
+  .buy-dew-button, .wallet-button {
+    padding: 8px 16px;
+    font-size: 16px;
+  }
+
+  .header {
+    font-size: 20px;
+    padding: 15px;
+  }
+
+  .social-links, .text-link a {
+    font-size: 16px;
+  }
+
+  .contract-address {
+    font-size: 16px;
+  }
+
+  #wallet-balance {
+    font-size: 16px;
+  }
+}
