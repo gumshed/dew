@@ -690,3 +690,37 @@ footer {
     to {bottom: 0; opacity: 0;}
 }
 
+.truth-content {
+  display: flex;
+  flex-direction: column; /* Stack image and link vertically */
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  text-align: center; /* Ensure text is centered */
+  height: 100%; /* Take full height of the container */
+  margin: 0; /* Remove any extra margins */
+}
+
+.truth-image {
+  max-width: 70%; /* Reduce image size to 70% of container width */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Add rounded corners */
+  cursor: pointer; /* Show pointer cursor for clickable image */
+  transition: transform 0.2s ease; /* Smooth hover effect */
+  margin-bottom: 10px; /* Add space between image and text link */
+}
+
+.truth-image:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.truth-link {
+  color: #f90000; /* Match the theme color */
+  text-decoration: none; /* Remove underline */
+  font-weight: bold; /* Make the text bold */
+  font-size: 18px; /* Adjust font size */
+  text-align: center; /* Center the link text */
+}
+
+.truth-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
