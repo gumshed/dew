@@ -339,13 +339,18 @@ function displayContent(option) {
 
             `;
             break;
-        case 'trade':
             case 'truth':
-    content = `<strong>Coming Soon...</strong?`;
-    break;
-
-            text = `<strong>Coming Soon</strong>`;
-            break;
+                content = `
+                    <div class="truth-content">
+                        <a href="https://x.com/MindControl_AI" target="_blank">
+                            <img src="img/dontlisten.jpg" alt="Don't Listen Image" class="truth-image" />
+                        </a>
+                        <p>
+                            <a href="https://x.com/MindControl_AI" target="_blank" class="truth-link">Mind Control AI</a>
+                        </p>
+                    </div>`;
+                break;
+            
         default:
             content = `<p>Select an option above to view more information.</p>`;
             text = '';
